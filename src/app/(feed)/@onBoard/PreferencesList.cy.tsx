@@ -12,8 +12,10 @@ describe('<PreferencesList />', () => {
 
 		cy.get('[data-cy="preference-card"]').should('have.class', 'card').and("have.class", "aspect-square")
 
-		cy.get('[data-cy="preference-card"]').click()
+		cy.get('[data-cy="preference-card-checked"]').first().should('not.be.visible')
 
-		cy.get('[data-cy="preference-card-checked"]').should('be.visible')
+		cy.get('[data-cy="preference-card"]').first().click()
+
+		cy.get('[data-cy="preference-card-checked"]').first().should('be.visible')
 	})
 })
