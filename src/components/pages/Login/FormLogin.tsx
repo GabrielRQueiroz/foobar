@@ -5,6 +5,7 @@ import * as Yup from 'yup'
 import axios from 'axios'
 import { useMutation } from 'react-query'
 import { useRouter } from 'next/navigation'
+import clsx from 'clsx'
 
 type fieldstype = {
 	email: string
@@ -13,7 +14,7 @@ type fieldstype = {
 
 const FormLogin = () => {
 	const router = useRouter()
-	const { mutate } = useMutation({
+	const { mutate, isError, isLoading, isSuccess } = useMutation({
 		mutationFn: (fields: fieldstype) => {
 			return axios.post('/auth/login', fields)
 		},
@@ -29,18 +30,18 @@ const FormLogin = () => {
 					password: ''
 				}}
 				validationSchema={Yup.object().shape({
-					email: Yup.string().email('Email é invalido').required('Email é necessario'),
+					email: Yup.string().email('Email é invalido').required('Email é necessário'),
 					password: Yup.string()
 						.min(6, 'Sua senha precisa ter no minimo 6 caracteres')
-						.required('É necessario uma senha')
+						.required('É necessário uma senha')
 				})}
 				onSubmit={fields => {
 					mutate(fields)
 					//alert('SUCCESS!! :-)\n\n' + JSON.stringify(fields, null, 4))
 				}}
-				render={({ errors, touched }) => (
-					<Form className="h-full w-full text-black">
-						<div className="p-2 text-sm text-black">
+				component={({ errors, touched }) => (
+					<Form className="h-full w-full text-base-content">
+						<div className="p-2 text-sm">
 							<p className="bold text-xl">Entrar no App</p>
 							<br />
 							<span>ou </span>
@@ -48,33 +49,44 @@ const FormLogin = () => {
 								criar uma conta
 							</a>
 						</div>
+						{isError && (
+							<div>
+								<p className="ml-2 text-error">E-mail ou senha incorretos.</p>
+							</div>
+						)}
 						<div className="p-2">
 							<Field
+								disabled={(isLoading || isSuccess)}
 								placeholder="Email"
 								name="email"
 								type="text"
 								className={
-									'placeholder-black-600 form-control w-full rounded-lg border-2 border-black bg-transparent p-2' +
-									(errors.email && touched.email ? ' is-invalid' : '')
+									clsx('placeholder-black-600 form-control w-full rounded-lg border-2 input-primary bg-transparent p-2',
+									(errors.email && touched.email ? 'is-invalid' : ''),
+									(isLoading || isSuccess) && "input-disabled")
 								}
 							/>
-							<ErrorMessage name="email" component="div" className="invalid-feedback  text-sm text-red-600" />
+							<ErrorMessage name="email" component="div" className="invalid-feedback text-sm text-error" />
 						</div>
 						<div className="p-2">
 							<Field
+								disabled={(isLoading || isSuccess)}
 								placeholder="Senha"
 								name="password"
 								type="password"
 								className={
-									'placeholder-black-600 form-control w-full rounded-lg border-2 border-black bg-transparent p-2' +
-									(errors.password && touched.password ? ' is-invalid' : '')
+									clsx('placeholder-black-600 form-control w-full rounded-lg border-2 input-primary bg-transparent p-2',
+									(errors.password && touched.password ? 'is-invalid' : ''),
+									(isLoading || isSuccess) && "input-disabled")
 								}
 							/>
-							<ErrorMessage name="password" component="div" className="invalid-feedback  text-sm text-red-600" />
+							<ErrorMessage name="password" component="div" className="invalid-feedback text-sm text-error" />
 						</div>
 						<div className="p-2">
-							<button type="submit" className="btn-color-black btn mr-2 w-full text-white">
-								Entrar
+							<button type="submit" disabled={(isLoading || isSuccess)} className="btn-primary btn mr-2 w-full text-primary-content">
+								{(isLoading || isSuccess) ? (
+									<span className="loading loading-spinner loading-md" />
+								) :"Entrar"}
 							</button>
 						</div>
 					</Form>
