@@ -1,3 +1,4 @@
+import '../../src/app/globals.css'
 // ***********************************************************
 // This example support/component.ts is processed and
 // loaded automatically before your test files.
