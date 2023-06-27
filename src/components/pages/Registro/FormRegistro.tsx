@@ -1,5 +1,5 @@
 'use client'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import { useRouter } from 'next/navigation'
 import { useMutation } from 'react-query'
@@ -7,7 +7,7 @@ import * as Yup from 'yup'
 import clsx from 'clsx'
 
 type FieldsType = {
-		name: string
+		username: string
 		email: string
 		password: string
 		confirmPassword?: string
@@ -15,7 +15,7 @@ type FieldsType = {
 
 const FormRegistro = () => {
 	const router = useRouter()
-	const { mutate, isError, isSuccess, isLoading } = useMutation({
+	const { mutate, isError, isSuccess, error, isLoading } = useMutation({
 		mutationFn: (fields: {user: FieldsType}) => {
 			return axios.post('/user', fields)
 		},
@@ -27,13 +27,13 @@ const FormRegistro = () => {
 		<div className="m-auto flex items-center justify-center">
 			<Formik
 				initialValues={{
-					name: '',
+					username: '',
 					email: '',
 					password: '',
 					confirmPassword: ''
 				}}
 				validationSchema={Yup.object().shape({
-					name: Yup.string().required('Apelido é necessário'),
+					username: Yup.string().required('Apelido é necessário'),
 					email: Yup.string().email('Email é invalido').required('Email é necessário'),
 					password: Yup.string()
 						.min(6, 'Sua senha precisa ter no minimo 6 caracteres')
@@ -59,8 +59,9 @@ const FormRegistro = () => {
 						</div>
 						{isError && (
 							<div>
-								{/* <p> {error instanceof AxiosError && error.response?.data} </p> */}
-								<p className="ml-2 text-error">E-mail já cadastrado.</p>
+								<p className="ml-2 text-error">Name {error instanceof AxiosError && error.response?.data?.name }</p>
+								<p className="ml-2 text-error">E-mail {error instanceof AxiosError && error.response?.data?.email }</p>
+								{/* <p className="ml-2 text-error">E-mail já cadastrado.</p> */}
 							</div>
 						)}
 						<div className="p-2">
