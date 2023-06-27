@@ -7,10 +7,10 @@ import * as Yup from 'yup'
 import clsx from 'clsx'
 
 type FieldsType = {
-		username: string
-		email: string
-		password: string
-		confirmPassword?: string
+	username: string
+	email: string
+	password: string
+	confirmPassword?: string
 }
 
 const FormRegistro = () => {
@@ -72,7 +72,7 @@ const FormRegistro = () => {
 								type="text"
 								className={
 									clsx('input-primary input w-full',
-									(errors.name && touched.name ? ' is-invalid' : ''),
+									(errors.username && touched.username ? ' is-invalid' : ''),
 									isSuccess || isLoading && "disabled")
 								}
 							/>
