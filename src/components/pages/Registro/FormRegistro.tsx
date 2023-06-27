@@ -63,7 +63,7 @@ const FormRegistro = () => {
 						</div>
 						{isError && (
 							<div>
-								<p> {error instanceof Error && error.message} </p>
+								<p> {error instanceof Error && error.name} </p>
 							</div>
 						)}
 						<div className="p-2">
