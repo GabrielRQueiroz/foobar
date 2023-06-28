@@ -2,22 +2,22 @@
 import React from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import clsx from 'clsx'
 import axios, { AxiosError } from 'axios'
 
-type fieldstype = {
+type FieldsType = {
 	name: string
 	email: string
 	password: string
-	confirmPassword: string
+	confirmPassword?: string
 }
 
 const FormRegistro2 = () => {
 	const router = useRouter()
 	const { mutate, isError, isLoading, isSuccess, error } = useMutation({
-		mutationFn: (fields: fieldstype) => {
+		mutationFn: (fields: Omit<FieldsType, "confirmPassword">) => {
 			return axios.post('/user', fields)
 		},
 		onSuccess: () => {
@@ -32,7 +32,7 @@ const FormRegistro2 = () => {
 					email: '',
 					password: '',
 					confirmPassword: ''
-				}}
+				} as FieldsType}
 				validationSchema={Yup.object().shape({
 					name: Yup.string().required('Apelido é necessário'),
 					email: Yup.string().email('Email é invalido').required('Email é necessário'),
@@ -44,6 +44,8 @@ const FormRegistro2 = () => {
 						.required('É necessário confirmar sua senha')
 				})}
 				onSubmit={fields => {
+					delete fields.confirmPassword
+					
 					mutate(fields)
 					//alert('SUCCESS!! :-)\n\n' + JSON.stringify(fields, null, 4))
 				}}

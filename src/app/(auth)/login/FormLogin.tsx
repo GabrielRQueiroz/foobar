@@ -3,11 +3,11 @@ import React from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import clsx from 'clsx'
 
-type fieldstype = {
+type FieldsType = {
 	email: string
 	password: string
 }
@@ -15,7 +15,7 @@ type fieldstype = {
 const FormLogin = () => {
 	const router = useRouter()
 	const { mutate, isError, isLoading, isSuccess } = useMutation({
-		mutationFn: (fields: fieldstype) => {
+		mutationFn: (fields: FieldsType) => {
 			return axios.post('/auth/login', fields)
 		},
 		onSuccess: () => {
@@ -28,7 +28,7 @@ const FormLogin = () => {
 				initialValues={{
 					email: '',
 					password: ''
-				}}
+				} as FieldsType}
 				validationSchema={Yup.object().shape({
 					email: Yup.string().email('Email é invalido').required('Email é necessário'),
 					password: Yup.string()

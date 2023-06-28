@@ -1,11 +1,12 @@
 'use client'
+
+import { Navbar, ThemeSwitcher } from '@/components'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import axios from 'axios'
-import { Navbar } from '@/components'
 import { Inter } from 'next/font/google'
 import { ReactNode } from 'react'
 import './globals.css'
-import { QueryClient, QueryClientProvider } from 'react-query'
-import { ThemeSwitcher } from '@/components'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,13 +20,14 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
 	return (
-		<html lang="pt-BR" data-theme="pastel">
+		<html lang="pt-BR">
 			<QueryClientProvider client={queryClient}>
 				<body className={inter.className}>
 					<Navbar />
 					{children}
 					<ThemeSwitcher />
 				</body>
+				<ReactQueryDevtools initialIsOpen={false} />
 			</QueryClientProvider>
 		</html>
 	)
