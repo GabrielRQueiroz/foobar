@@ -1,4 +1,4 @@
-import FormRegistro from "./FormRegistro"
+import { FormRegistro } from "./FormRegistro"
 import Image from "next/image"
 
 const RegistroPage = () => {

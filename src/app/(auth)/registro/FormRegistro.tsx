@@ -7,6 +7,10 @@ import { useRouter } from 'next/navigation'
 import clsx from 'clsx'
 import axios, { AxiosError } from 'axios'
 
+const sendUserSignUp = async (fields: Omit<FieldsType, "confirmPassword">) => {
+	return axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user`, fields)
+}
+
 type FieldsType = {
 	name: string
 	email: string
@@ -14,12 +18,10 @@ type FieldsType = {
 	confirmPassword?: string
 }
 
-const FormRegistro2 = () => {
+export const FormRegistro = () => {
 	const router = useRouter()
 	const { mutate, isError, isLoading, isSuccess, error } = useMutation({
-		mutationFn: (fields: Omit<FieldsType, "confirmPassword">) => {
-			return axios.post('/user', fields)
-		},
+		mutationFn: sendUserSignUp,
 		onSuccess: () => {
 			router.push('/login')
 		}
@@ -142,4 +144,3 @@ const FormRegistro2 = () => {
 		</div>
 	)
 }
-export default FormRegistro2

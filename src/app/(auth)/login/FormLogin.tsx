@@ -7,17 +7,19 @@ import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import clsx from 'clsx'
 
+const sendUserSignIn = async (fields: FieldsType) => {
+	return axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, fields)
+}
+
 type FieldsType = {
 	email: string
 	password: string
 }
 
-const FormLogin = () => {
+export const FormLogin = () => {
 	const router = useRouter()
 	const { mutate, isError, isLoading, isSuccess } = useMutation({
-		mutationFn: (fields: FieldsType) => {
-			return axios.post('/auth/login', fields)
-		},
+		mutationFn: sendUserSignIn,
 		onSuccess: () => {
 			router.push('/')
 		}
@@ -95,4 +97,3 @@ const FormLogin = () => {
 		</div>
 	)
 }
-export default FormLogin

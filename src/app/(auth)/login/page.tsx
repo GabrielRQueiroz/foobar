@@ -1,4 +1,4 @@
-import FormLogin from "./FormLogin"
+import {FormLogin} from "./FormLogin"
 import Image from "next/image"
 
 const LoginPage = () => {
