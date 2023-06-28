@@ -3,21 +3,23 @@ import React from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import clsx from 'clsx'
 
-type fieldstype = {
+const sendUserSignIn = async (fields: FieldsType) => {
+	return axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, fields)
+}
+
+type FieldsType = {
 	email: string
 	password: string
 }
 
-const FormLogin = () => {
+export const FormLogin = () => {
 	const router = useRouter()
 	const { mutate, isError, isLoading, isSuccess } = useMutation({
-		mutationFn: (fields: fieldstype) => {
-			return axios.post('/auth/login', fields)
-		},
+		mutationFn: sendUserSignIn,
 		onSuccess: () => {
 			router.push('/')
 		}
@@ -28,7 +30,7 @@ const FormLogin = () => {
 				initialValues={{
 					email: '',
 					password: ''
-				}}
+				} as FieldsType}
 				validationSchema={Yup.object().shape({
 					email: Yup.string().email('Email é invalido').required('Email é necessário'),
 					password: Yup.string()
@@ -95,4 +97,3 @@ const FormLogin = () => {
 		</div>
 	)
 }
-export default FormLogin

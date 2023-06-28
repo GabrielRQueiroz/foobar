@@ -1,5 +1,5 @@
 {
-	"plugins": ["cypress", "react", "import", "jsx-a11y"],
+	"plugins": ["cypress", "react", "import", "jsx-a11y", "@tanstack/query"],
 	"extends": [
 		"next/core-web-vitals",
 		"plugin:cypress/recommended",
@@ -8,6 +8,7 @@
 		"plugin:react/recommended",
 		"plugin:jsx-a11y/recommended",
 		"plugin:react-hooks/recommended",
+		"plugin:@tanstack/eslint-plugin-query/recommended",
 		"prettier"
 	],
 	"rules": {

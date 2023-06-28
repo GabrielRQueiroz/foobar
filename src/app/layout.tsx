@@ -1,15 +1,11 @@
-'use client'
-import axios from 'axios'
-import { Navbar } from '@/components'
+import { QueryProviders } from '@/utils/queryProvider'
+import { Navbar, ThemeSwitcher } from '@/components'
+//import axios from 'axios'
 import { Inter } from 'next/font/google'
 import { ReactNode } from 'react'
 import './globals.css'
-import { QueryClient, QueryClientProvider } from 'react-query'
 
 const inter = Inter({ subsets: ['latin'] })
-
-const queryClient = new QueryClient()
-axios.defaults.baseURL = 'http://localhost:3000/api'
 
 export const metadata = {
 	title: 'RE:Match',
@@ -18,13 +14,14 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
 	return (
-		<html lang="pt-BR" data-theme="pastel">
-			<QueryClientProvider client={queryClient}>
-				<body className={inter.className}>
+		<html lang="pt-BR">
+			<body className={inter.className}>
+				<QueryProviders>
 					<Navbar />
 					{children}
-				</body>
-			</QueryClientProvider>
+				</QueryProviders>
+				<ThemeSwitcher />
+			</body>
 		</html>
 	)
 }
