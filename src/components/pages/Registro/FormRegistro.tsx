@@ -1,22 +1,23 @@
 'use client'
-import axios, { AxiosError } from 'axios'
-import { ErrorMessage, Field, Form, Formik } from 'formik'
-import { useRouter } from 'next/navigation'
-import { useMutation } from 'react-query'
+import React from 'react'
+import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
+import { useMutation } from 'react-query'
+import { useRouter } from 'next/navigation'
 import clsx from 'clsx'
+import axios, { AxiosError } from 'axios'
 
-type FieldsType = {
-	username: string
+type fieldstype = {
+	name: string
 	email: string
 	password: string
-	confirmPassword?: string
+	confirmPassword: string
 }
 
-const FormRegistro = () => {
+const FormRegistro2 = () => {
 	const router = useRouter()
-	const { mutate, isError, isSuccess, error, isLoading } = useMutation({
-		mutationFn: (fields: {user: FieldsType}) => {
+	const { mutate, isError, isLoading, isSuccess, error } = useMutation({
+		mutationFn: (fields: fieldstype) => {
 			return axios.post('/user', fields)
 		},
 		onSuccess: () => {
@@ -27,13 +28,13 @@ const FormRegistro = () => {
 		<div className="m-auto flex items-center justify-center">
 			<Formik
 				initialValues={{
-					username: '',
+					name: '',
 					email: '',
 					password: '',
 					confirmPassword: ''
 				}}
 				validationSchema={Yup.object().shape({
-					username: Yup.string().required('Apelido é necessário'),
+					name: Yup.string().required('Apelido é necessário'),
 					email: Yup.string().email('Email é invalido').required('Email é necessário'),
 					password: Yup.string()
 						.min(6, 'Sua senha precisa ter no minimo 6 caracteres')
@@ -42,95 +43,96 @@ const FormRegistro = () => {
 						.oneOf([Yup.ref('password')], 'Suas senhas não combinam')
 						.required('É necessário confirmar sua senha')
 				})}
-				onSubmit={(fields: FieldsType) => {
-					delete fields.confirmPassword
-					mutate({"user": fields})
+				onSubmit={fields => {
+					mutate(fields)
 					//alert('SUCCESS!! :-)\n\n' + JSON.stringify(fields, null, 4))
 				}}
 				component={({ errors, touched }) => (
 					<Form className="h-full w-full text-base-content">
 						<div className="p-2 text-sm">
-							<p className="bold text-xl">Criar conta</p>
+							<p className="bold text-xl">Criar Conta</p>
 							<br />
 							<span>ou </span>
 							<a className="text-[#4F75FF] underline" href="/login">
-								entrar com conta existente
+								ja tenho uma conta
 							</a>
 						</div>
 						{isError && (
 							<div>
-								<p className="ml-2 text-error">Name {error instanceof AxiosError && error.response?.data?.name }</p>
-								<p className="ml-2 text-error">E-mail {error instanceof AxiosError && error.response?.data?.email }</p>
+								<p className="ml-2 text-error">
+									{error instanceof AxiosError && error.response?.data?.name ? 'Nome já cadastrado' : ''}
+								</p>
+								<p className="ml-2 text-error">
+									{' '}
+									{error instanceof AxiosError && error.response?.data?.email ? 'Email já cadastrado' : ''}{' '}
+								</p>
 								{/* <p className="ml-2 text-error">E-mail já cadastrado.</p> */}
 							</div>
 						)}
 						<div className="p-2">
 							<Field
-								placeholder="Apelido"
+								disabled={isLoading || isSuccess}
+								placeholder="Usuario"
 								name="name"
-								disabled={isSuccess || isLoading}
 								type="text"
-								className={
-									clsx('input-primary input w-full',
-									(errors.username && touched.username ? ' is-invalid' : ''),
-									isSuccess || isLoading && "disabled")
-								}
+								className={clsx(
+									'placeholder-black-600 form-control input-primary w-full rounded-lg border-2 bg-transparent p-2',
+									errors.name && touched.name ? 'is-invalid' : '',
+									(isLoading || isSuccess) && 'input-disabled'
+								)}
 							/>
 							<ErrorMessage name="name" component="div" className="invalid-feedback text-sm text-error" />
 						</div>
 						<div className="p-2">
 							<Field
+								disabled={isLoading || isSuccess}
 								placeholder="Email"
 								name="email"
-								disabled={isSuccess || isLoading}
 								type="text"
-								className={
-									clsx('input-primary input w-full',
-									(errors.email && touched.email ? ' is-invalid' : ''),
-									isSuccess || isLoading && "disabled")
-								}
+								className={clsx(
+									'placeholder-black-600 form-control input-primary w-full rounded-lg border-2 bg-transparent p-2',
+									errors.email && touched.email ? 'is-invalid' : '',
+									(isLoading || isSuccess) && 'input-disabled'
+								)}
 							/>
-							<ErrorMessage name="email" component="div" className="invalid-feedback  text-sm text-error" />
+							<ErrorMessage name="email" component="div" className="invalid-feedback text-sm text-error" />
 						</div>
 						<div className="p-2">
 							<Field
+								disabled={isLoading || isSuccess}
 								placeholder="Senha"
 								name="password"
-								disabled={isSuccess || isLoading}
 								type="password"
-								className={
-									clsx('input-primary input w-full',
-									(errors.password && touched.password ? ' is-invalid' : ''),
-									isSuccess || isLoading && "disabled")
-								}
+								className={clsx(
+									'placeholder-black-600 form-control input-primary w-full rounded-lg border-2 bg-transparent p-2',
+									errors.password && touched.password ? 'is-invalid' : '',
+									(isLoading || isSuccess) && 'input-disabled'
+								)}
 							/>
-							<ErrorMessage name="password" component="div" className="invalid-feedback  text-sm text-error" />
+							<ErrorMessage name="password" component="div" className="invalid-feedback text-sm text-error" />
 						</div>
 						<div className="p-2">
 							<Field
-								placeholder="Confirmar Senha"
+								disabled={isLoading || isSuccess}
+								placeholder="Confirmar senha"
 								name="confirmPassword"
-								disabled={isSuccess || isLoading}
 								type="password"
-								className={
-									clsx('input-primary input w-full',
-									(errors.confirmPassword && touched.confirmPassword ? ' is-invalid' : ''),
-									isSuccess || isLoading && "disabled")
-								}
+								className={clsx(
+									'placeholder-black-600 form-control input-primary w-full rounded-lg border-2 bg-transparent p-2',
+									errors.confirmPassword && touched.confirmPassword ? 'is-invalid' : '',
+									(isLoading || isSuccess) && 'input-disabled'
+								)}
 							/>
-							<ErrorMessage name="confirmPassword" component="div" className="invalid-feedback  text-sm text-error" />
+							<ErrorMessage name="confirmPassword" component="div" className="invalid-feedback text-sm text-error" />
 						</div>
 						<div className="p-2">
-							<button disabled={isSuccess || isLoading} type="submit" className="btn-primary btn mr-2 w-full text-primary-content">
-								{isSuccess || isLoading ? (
-									<span className="loading loading-spinner loading-md" />
-								) : "Registrar"}
+							<button
+								type="submit"
+								disabled={isLoading || isSuccess}
+								className="btn-primary btn mr-2 w-full text-primary-content"
+							>
+								{isLoading || isSuccess ? <span className="loading loading-spinner loading-md" /> : 'Entrar'}
 							</button>
-						</div>
-						<div className="p-2 text-sm text-white">
-							<a className="text-[#4F75FF] underline" href="/esqueceu-senha">
-								Esqueci minha senha
-							</a>
 						</div>
 					</Form>
 				)}
@@ -138,4 +140,4 @@ const FormRegistro = () => {
 		</div>
 	)
 }
-export default FormRegistro
+export default FormRegistro2
