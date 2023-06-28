@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google'
 import { ReactNode } from 'react'
 import './globals.css'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { ThemeSwitcher } from '@/components'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 				<body className={inter.className}>
 					<Navbar />
 					{children}
+					<ThemeSwitcher />
 				</body>
 			</QueryClientProvider>
 		</html>
