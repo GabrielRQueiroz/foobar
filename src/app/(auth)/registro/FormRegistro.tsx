@@ -29,12 +29,14 @@ export const FormRegistro = () => {
 	return (
 		<div className="m-auto flex items-center justify-center">
 			<Formik
-				initialValues={{
-					name: '',
-					email: '',
-					password: '',
-					confirmPassword: ''
-				} as FieldsType}
+				initialValues={
+					{
+						name: '',
+						email: '',
+						password: '',
+						confirmPassword: ''
+					} as FieldsType
+				}
 				validationSchema={Yup.object().shape({
 					name: Yup.string().required('Apelido é necessário'),
 					email: Yup.string().email('Email é invalido').required('Email é necessário'),
@@ -47,7 +49,7 @@ export const FormRegistro = () => {
 				})}
 				onSubmit={fields => {
 					delete fields.confirmPassword
-					
+
 					mutate(fields)
 					//alert('SUCCESS!! :-)\n\n' + JSON.stringify(fields, null, 4))
 				}}
@@ -63,10 +65,10 @@ export const FormRegistro = () => {
 						</div>
 						{isError && (
 							<div>
-								<p className="ml-2 text-error">
+								<p data-cy="name-taked" className="ml-2 text-error">
 									{error instanceof AxiosError && error.response?.data?.name ? 'Nome já cadastrado' : ''}
 								</p>
-								<p className="ml-2 text-error">
+								<p data-cy="email-taked" className="ml-2 text-error">
 									{' '}
 									{error instanceof AxiosError && error.response?.data?.email ? 'Email já cadastrado' : ''}{' '}
 								</p>
