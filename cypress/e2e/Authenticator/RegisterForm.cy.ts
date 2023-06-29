@@ -45,6 +45,7 @@ describe('Check the registration page', () => {
 
 	it('Empty submit', () => {
 		cy.visit('/registro')
+		cy.wait(500)
 		cy.get('[data-cy="submit"]').click()
 		cy.wait(3000)
 		cy.get('[data-cy="name"]').type(testname, { delay: 150 })
@@ -64,7 +65,9 @@ describe('Check the registration page', () => {
 		cy.get('[data-cy="password"]').type('123456', { delay: 150 })
 		cy.get('[data-cy="confirmPassword"]').type('123456', { delay: 150 })
 		cy.get('[data-cy="submit"]').click()
-		cy.wait(10000)
+		cy.wait(5000)
+		cy.url().should('include', '/login')
+		cy.wait(5000)
 	})
 
 	it('Email already taken', () => {
