@@ -75,6 +75,7 @@ export const FormRegistro = () => {
 						)}
 						<div className="p-2">
 							<Field
+								data-cy="name"
 								disabled={isLoading || isSuccess}
 								placeholder="Usuario"
 								name="name"
@@ -89,6 +90,7 @@ export const FormRegistro = () => {
 						</div>
 						<div className="p-2">
 							<Field
+								data-cy="email"
 								disabled={isLoading || isSuccess}
 								placeholder="Email"
 								name="email"
@@ -103,6 +105,7 @@ export const FormRegistro = () => {
 						</div>
 						<div className="p-2">
 							<Field
+								data-cy="password"
 								disabled={isLoading || isSuccess}
 								placeholder="Senha"
 								name="password"
@@ -117,6 +120,7 @@ export const FormRegistro = () => {
 						</div>
 						<div className="p-2">
 							<Field
+								data-cy="confirmPassword"
 								disabled={isLoading || isSuccess}
 								placeholder="Confirmar senha"
 								name="confirmPassword"
@@ -131,11 +135,12 @@ export const FormRegistro = () => {
 						</div>
 						<div className="p-2">
 							<button
+								data-cy="submit"
 								type="submit"
 								disabled={isLoading || isSuccess}
 								className="btn-primary btn mr-2 w-full text-primary-content"
 							>
-								{isLoading || isSuccess ? <span className="loading loading-spinner loading-md" /> : 'Entrar'}
+								{isLoading || isSuccess ? <span className="loading loading-spinner loading-md" /> : 'Cadastrar'}
 							</button>
 						</div>
 					</Form>
