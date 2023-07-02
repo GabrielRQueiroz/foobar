@@ -9,6 +9,7 @@ const LoginPage = () => {
 				</div>
 				<div className="m-auto">
 					<Image
+						priority
 						className="hidden [[data-theme=fantasy]_&]:block"
 						src="/Rematch-logo.webp"
 						width={350}
@@ -16,6 +17,7 @@ const LoginPage = () => {
 						alt="Logo Form"
 					/>
 					<Image
+						priority
 						className="hidden [[data-theme=dark]_&]:block "
 						src="/Rematch-lg-white.webp"
 						width={350}
