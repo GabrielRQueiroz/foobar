@@ -1,14 +1,14 @@
 'use client'
-import React from 'react'
-import { Formik, Field, Form, ErrorMessage } from 'formik'
-import * as Yup from 'yup'
+import { apiEndpoints } from '@/lib/api'
 import { useMutation } from '@tanstack/react-query'
-import { useRouter } from 'next/navigation'
-import clsx from 'clsx'
 import axios, { AxiosError } from 'axios'
+import clsx from 'clsx'
+import { ErrorMessage, Field, Form, Formik } from 'formik'
+import { useRouter } from 'next/navigation'
+import * as Yup from 'yup'
 
-const sendUserSignUp = async (fields: Omit<FieldsType, "confirmPassword">) => {
-	return axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user`, fields)
+const sendUserSignUp = async (fields: Omit<FieldsType, 'confirmPassword'>) => {
+	return axios.post(apiEndpoints.POST_USER_SIGN_UP, fields)
 }
 
 type FieldsType = {
