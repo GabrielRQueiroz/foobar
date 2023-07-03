@@ -1,19 +1,22 @@
 'use client'
 import { apiEndpoints } from '@/lib/api'
 import { Check } from '@phosphor-icons/react'
+import { useQuery } from '@tanstack/react-query'
+import axios, { AxiosError } from 'axios'
 import clsx from 'clsx'
 import Image from 'next/image'
 import { useState } from 'react'
-import useSWR from 'swr'
 
-const getPreferences = async (url: string) => {
-	const response = await fetch(url)
+const getPreferences = async () => {
+	try {
+		const response = await axios.get(apiEndpoints.GET_ONBOARD_PREFERENCES)
 
-	if (!response.ok) {
-		throw new Error(response.statusText)
+		return response.data
+	} catch (error) {
+		if (error instanceof AxiosError) {
+			throw new Error(error.message)
+		}
 	}
-
-	return response.json().then(data => data.slice(0, 32))
 }
 
 // const updatePreferences = async (url: string, { arg }: { arg: { preferenceId: string } }) => {
@@ -30,12 +33,15 @@ const getPreferences = async (url: string) => {
 // }
 
 export const PreferencesList = () => {
-	const { data: preferences, isLoading } = useSWR(apiEndpoints.GET_ALL_PHOTOS, getPreferences)
+	const { data: preferences, isLoading } = useQuery({
+		queryKey: ['onboarding'], 
+		queryFn: getPreferences
+	})
 	// const { trigger } = useSWRMutation(apiEndpoints.MUTATE_PREFERENCES, updatePreferences)
 	const [selectedPreferences, setSelectedPreferences] = useState<string[]>([])
 
 	const handlePreferenceSelection = async (preferenceId: string) => {
-		 // await trigger({ preferenceId }).then(() => {}) <<< falta implementar mock do backend
+		// await trigger({ preferenceId }).then(() => {}) <<< falta implementar mock do backend
 
 		const newSelectionList = selectedPreferences.includes(preferenceId)
 			? selectedPreferences.filter(id => id !== preferenceId)
@@ -52,7 +58,7 @@ export const PreferencesList = () => {
 			{isLoading ? (
 				<span className="loading-spinner mx-auto h-6 w-6" />
 			) : (
-				preferences.map((preference: any) => (
+				preferences?.map((preference: any) => (
 					<button
 						onClick={e => {
 							e.preventDefault()
@@ -73,7 +79,7 @@ export const PreferencesList = () => {
 						<div
 							data-cy="preference-card"
 							className={clsx(
-								'card image-full card-compact h-full w-full shadow-xl',
+								'card-compact card image-full h-full w-full shadow-xl',
 								selectedPreferences.includes(preference.id) && 'border border-primary'
 							)}
 						>
