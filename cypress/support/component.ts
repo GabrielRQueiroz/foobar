@@ -23,6 +23,11 @@ import './commands'
 import '@/app/globals.css'
 
 import { mount } from 'cypress/react18'
+import { worker } from '../../src/mocks/browser'
+
+Cypress.on('test:before:run:async', async () => {
+	await worker.start()
+})
 
 // Augment the Cypress namespace to include type definitions for
 // your custom command.
