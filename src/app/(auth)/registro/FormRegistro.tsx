@@ -1,14 +1,14 @@
 'use client'
-import React from 'react'
-import { Formik, Field, Form, ErrorMessage } from 'formik'
-import * as Yup from 'yup'
+import { apiEndpoints } from '@/lib/api'
 import { useMutation } from '@tanstack/react-query'
-import { useRouter } from 'next/navigation'
-import clsx from 'clsx'
 import axios, { AxiosError } from 'axios'
+import clsx from 'clsx'
+import { ErrorMessage, Field, Form, Formik } from 'formik'
+import { useRouter } from 'next/navigation'
+import * as Yup from 'yup'
 
-const sendUserSignUp = async (fields: Omit<FieldsType, "confirmPassword">) => {
-	return axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user`, fields)
+const sendUserSignUp = async (fields: Omit<FieldsType, 'confirmPassword'>) => {
+	return axios.post(apiEndpoints.POST_USER_SIGN_UP, fields)
 }
 
 type FieldsType = {
@@ -29,12 +29,14 @@ export const FormRegistro = () => {
 	return (
 		<div className="m-auto flex items-center justify-center">
 			<Formik
-				initialValues={{
-					name: '',
-					email: '',
-					password: '',
-					confirmPassword: ''
-				} as FieldsType}
+				initialValues={
+					{
+						name: '',
+						email: '',
+						password: '',
+						confirmPassword: ''
+					} as FieldsType
+				}
 				validationSchema={Yup.object().shape({
 					name: Yup.string().required('Apelido é necessário'),
 					email: Yup.string().email('Email é invalido').required('Email é necessário'),
@@ -47,7 +49,7 @@ export const FormRegistro = () => {
 				})}
 				onSubmit={fields => {
 					delete fields.confirmPassword
-					
+
 					mutate(fields)
 					//alert('SUCCESS!! :-)\n\n' + JSON.stringify(fields, null, 4))
 				}}
@@ -63,10 +65,10 @@ export const FormRegistro = () => {
 						</div>
 						{isError && (
 							<div>
-								<p className="ml-2 text-error">
+								<p data-cy="name-taked" className="ml-2 text-error">
 									{error instanceof AxiosError && error.response?.data?.name ? 'Nome já cadastrado' : ''}
 								</p>
-								<p className="ml-2 text-error">
+								<p data-cy="email-taked" className="ml-2 text-error">
 									{' '}
 									{error instanceof AxiosError && error.response?.data?.email ? 'Email já cadastrado' : ''}{' '}
 								</p>
@@ -75,6 +77,7 @@ export const FormRegistro = () => {
 						)}
 						<div className="p-2">
 							<Field
+								data-cy="name"
 								disabled={isLoading || isSuccess}
 								placeholder="Usuario"
 								name="name"
@@ -89,6 +92,7 @@ export const FormRegistro = () => {
 						</div>
 						<div className="p-2">
 							<Field
+								data-cy="email"
 								disabled={isLoading || isSuccess}
 								placeholder="Email"
 								name="email"
@@ -103,6 +107,7 @@ export const FormRegistro = () => {
 						</div>
 						<div className="p-2">
 							<Field
+								data-cy="password"
 								disabled={isLoading || isSuccess}
 								placeholder="Senha"
 								name="password"
@@ -117,6 +122,7 @@ export const FormRegistro = () => {
 						</div>
 						<div className="p-2">
 							<Field
+								data-cy="confirmPassword"
 								disabled={isLoading || isSuccess}
 								placeholder="Confirmar senha"
 								name="confirmPassword"
@@ -131,11 +137,12 @@ export const FormRegistro = () => {
 						</div>
 						<div className="p-2">
 							<button
+								data-cy="submit"
 								type="submit"
 								disabled={isLoading || isSuccess}
 								className="btn-primary btn mr-2 w-full text-primary-content"
 							>
-								{isLoading || isSuccess ? <span className="loading loading-spinner loading-md" /> : 'Entrar'}
+								{isLoading || isSuccess ? <span className="loading loading-spinner loading-md" /> : 'Cadastrar'}
 							</button>
 						</div>
 					</Form>
