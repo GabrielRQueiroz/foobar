@@ -4,6 +4,7 @@ import { QueryProviders } from '@/utils/queryProvider'
 import { MockWorker } from '@/utils/mockWorker'
 import { Inter } from 'next/font/google'
 import { ReactNode } from 'react'
+import { Toaster } from 'react-hot-toast';
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 						{children}
 					</QueryProviders>
 					<ThemeSwitcher />
+					<Toaster />
 				</body>
 			</MockWorker>
 		</html>
