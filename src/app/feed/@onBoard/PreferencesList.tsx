@@ -10,7 +10,7 @@ import toast from 'react-hot-toast'
 
 const getPreferences = async () => {
 	try {
-		const response = await axios.get(apiEndpoints.GET_ONBOARD_PREFERENCES)
+		const response = await axios.get(apiEndpoints.GET_PREFERENCES)
 
 		return response.data
 	} catch (error) {
