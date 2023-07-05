@@ -6,9 +6,10 @@ import axios from 'axios'
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import clsx from 'clsx'
+import { apiEndpoints } from '@/lib/api'
 
 const sendUserSignIn = async (fields: FieldsType) => {
-	return axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, fields)
+	return axios.post(apiEndpoints.POST_USER_LOGIN, fields)
 }
 
 type FieldsType = {
