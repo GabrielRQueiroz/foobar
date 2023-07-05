@@ -26,7 +26,7 @@ describe('<PreferencesList />', () => {
 			</QueryClientProvider>
 		)
 
-		cy.intercept('GET', apiEndpoints.GET_ONBOARD_PREFERENCES)
+		cy.intercept('GET', apiEndpoints.GET_PREFERENCES)
 
 		cy.get('[data-cy="preferences-list"]').children().should('have.lengthOf.within', 6, 32)
 
