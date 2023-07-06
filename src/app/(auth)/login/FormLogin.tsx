@@ -22,7 +22,7 @@ export const FormLogin = () => {
 	const { mutate, isError, isLoading, isSuccess } = useMutation({
 		mutationFn: sendUserSignIn,
 		onSuccess: () => {
-			router.push('/')
+			router.push('/feed')
 		}
 	})
 	return (
