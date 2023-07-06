@@ -1,6 +1,6 @@
-import { apiEndpoints } from '@/lib/api'
-import { preferencesData } from '@/mocks/constants/preferences'
 import { rest } from 'msw'
+import { apiEndpoints } from '../lib/api'
+import { preferencesData } from './constants/preferences'
 
 export const handlers = [
 	rest.get(apiEndpoints.GET_PREFERENCES, (req, res, ctx) => {
