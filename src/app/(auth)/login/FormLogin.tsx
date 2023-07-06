@@ -1,12 +1,11 @@
 'use client'
-import React from 'react'
-import { Formik, Field, Form, ErrorMessage } from 'formik'
-import * as Yup from 'yup'
-import axios from 'axios'
+import { apiEndpoints } from '@/lib/routes'
 import { useMutation } from '@tanstack/react-query'
-import { useRouter } from 'next/navigation'
+import axios from 'axios'
 import clsx from 'clsx'
-import { apiEndpoints } from '@/lib/api'
+import { ErrorMessage, Field, Form, Formik } from 'formik'
+import { useRouter } from 'next/navigation'
+import * as Yup from 'yup'
 
 const sendUserSignIn = async (fields: FieldsType) => {
 	return axios.post(apiEndpoints.POST_USER_LOGIN, fields)

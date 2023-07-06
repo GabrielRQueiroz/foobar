@@ -1,30 +1,11 @@
 'use client'
-import { apiEndpoints } from '@/lib/api'
+import { getPreferences, updatePreferences } from '@/lib/api'
 import { Check } from '@phosphor-icons/react'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import axios, { AxiosError } from 'axios'
 import clsx from 'clsx'
 import Image from 'next/image'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
-
-const getPreferences = async () => {
-	try {
-		const response = await axios.get(apiEndpoints.GET_PREFERENCES)
-
-		return response.data
-	} catch (error) {
-		if (error instanceof AxiosError) {
-			throw new Error(error.message)
-		}
-	}
-}
-
-const updatePreferences = async (selectedPreferences: any[]) => {
-	const response = await axios.post(apiEndpoints.MUTATE_PREFERENCES, selectedPreferences)
-
-	return response.data
-}
 
 export const PreferencesList = () => {
 	const { data: preferences, isLoading } = useQuery({
@@ -66,7 +47,16 @@ export const PreferencesList = () => {
 	}
 
 	return (
-		<>
+		<dialog
+			id="onboarding-menu"
+			className="modal modal-open"
+		>
+			<form method="dialog" className="modal-box max-w-3xl relative p-0">
+				<div className="sticky top-0 z-30 p-6 text-center bg-base-100">
+					<h3 className="text-md sm:text-lg font-bold">Boas vindas ao Re:Match!</h3>
+					<p className="text-sm sm:text-base py-2">Antes de prosseguir, nos mostre um pouco do que você gosta</p>
+					<p className="text-xs sm:text-sm text-info">Você poderá modifacá-las mais tarde</p>
+				</div>
 			<div
 				data-cy="preferences-list"
 				className="flex w-full flex-wrap items-center justify-center gap-8 bg-transparent p-6"
@@ -81,7 +71,7 @@ export const PreferencesList = () => {
 								e.preventDefault()
 								handlePreferenceSelection(preference.id)
 							}}
-							className="indicator aspect-square flex-1 basis-1/3 md:basis-1/5"
+							className="indicator aspect-square flex-1 basis-1/4 md:basis-1/5"
 							key={`${preference.id + index}-${preference.title}`}
 						>
 							<span
@@ -96,7 +86,7 @@ export const PreferencesList = () => {
 							<div
 								data-cy="preference-card"
 								className={clsx(
-									'card-compact card image-full h-full w-full shadow-xl',
+									'card image-full card-compact h-full w-full shadow-xl',
 									selectedPreferences.includes(preference.id) && 'border border-primary'
 								)}
 							>
@@ -123,7 +113,7 @@ export const PreferencesList = () => {
 				</button>
 				<button
 					type="submit"
-					data-cy='submit-btn'
+					data-cy="submit-btn"
 					disabled={mutationIsLoading || mutationIsSuccess || selectedPreferences.length === 0}
 					onClick={handlePreferencesSubmit}
 					className="btn-primary btn"
@@ -131,6 +121,7 @@ export const PreferencesList = () => {
 					Continuar
 				</button>
 			</div>
-		</>
+			</form>
+		</dialog>
 	)
 }
