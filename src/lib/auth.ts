@@ -1,1 +1,1 @@
-export const getUser = () => false
+export const getUser = () => true

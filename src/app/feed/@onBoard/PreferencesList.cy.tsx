@@ -1,4 +1,4 @@
-import { apiEndpoints } from '@/lib/api'
+import { apiEndpoints } from '@/lib/routes'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { PreferencesList } from './PreferencesList'
 
