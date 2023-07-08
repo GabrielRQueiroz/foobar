@@ -3,7 +3,7 @@ import Image from "next/image"
 
 const LoginPage = () => {
     return (
-			<>
+			<main className='flex h-screen w-full justify-between bg-base-100'>
 				<div className="m-auto hidden md:inline">
 					<Image src="/Subaru-Login.webp" width={310} height={400} alt="Subaru Login" />
 				</div>
@@ -26,7 +26,7 @@ const LoginPage = () => {
 					/>
 					<FormLogin />
 				</div>
-			</>
+			</main>
 		)
 }
 

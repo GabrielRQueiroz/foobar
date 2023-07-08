@@ -1,5 +1,5 @@
 'use client'
-import { apiEndpoints } from '@/lib/api'
+import { apiEndpoints } from '@/lib/routes'
 import { useMutation } from '@tanstack/react-query'
 import axios, { AxiosError } from 'axios'
 import clsx from 'clsx'

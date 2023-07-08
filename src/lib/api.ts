@@ -1,84 +1,27 @@
-const baseUrl = process.env.NEXT_PUBLIC_API_URL
 
-const apiEndpoints = {
-	BASE_URL: `${baseUrl}`,
-	POST_USER_LOGIN: `${baseUrl}/auth/login`,
-	POST_USER_LOGOUT: `${baseUrl}/auth/logout`,
-	/**
-	 * Essa rota deve ser acrescida de /:id para buscar um usuário específico
-	 * @example: `${GET_USER_DATA}/${user_id}`
-	 * @example: GET_USER_DATA + '/' + user_id
-	 */
-	GET_USER_DATA: `${baseUrl}/user`,
-	POST_USER_SIGN_UP: `${baseUrl}/user`,
+import axios, { AxiosError } from 'axios'
+import { apiEndpoints } from './routes'
 
-	GET_BOOK_INDEX: `${baseUrl}/book`,
-	POST_BOOK_INDEX: `${baseUrl}/book`,
-	/**
-	 * Essa rota deve ser acrescida de /:id para buscar um livro específico
-	 * @example: `${GET_BOOK_DATA}/${book_id}`
-	 * @example: GET_BOOK_DATA + '/' + book_id
-	 */
-	GET_BOOK_DATA: `${baseUrl}/book`,
-	/**
-	 * Essa rota deve ser acrescida de /:id para buscar uma série específica
-	 * @example: `${PUT_BOOK_DATA}/${show_id}`
-	 * @example: PUT_BOOK_DATA + '/' + show_id
-	 */
-	PUT_BOOK_DATA: `${baseUrl}/book`,
-	/**
-	 * Essa rota deve ser acrescida de /:id para buscar uma série específica
-	 * @example: `${DELETE_BOOK_DATA}/${show_id}`
-	 * @example: DELETE_BOOK_DATA + '/' + show_id
-	 */
-	DELETE_BOOK_DATA: `${baseUrl}/book`,
+export const getPreferences = async () => {
+	try {
+		const response = await axios.get(apiEndpoints.GET_PREFERENCES)
 
-	GET_MOVIE_INDEX: `${baseUrl}/movie`,
-	POST_MOVIE_INDEX: `${baseUrl}/movie`,
-	/**
-	 * Essa rota deve ser acrescida de /:id para buscar um filme específico
-	 * @example: `${GET_MOVIE_DATA}/${movie_id}`
-	 * @example: GET_MOVIE_DATA + '/' + movie_id
-	 */
-	GET_MOVIE_DATA: `${baseUrl}/movie`,
-	/**
-	 * Essa rota deve ser acrescida de /:id para buscar uma série específica
-	 * @example: `${PUT_MOVIE_DATA}/${show_id}`
-	 * @example: PUT_MOVIE_DATA + '/' + show_id
-	 */
-	PUT_MOVIE_DATA: `${baseUrl}/movie`,
-	/**
-	 * Essa rota deve ser acrescida de /:id para buscar uma série específica
-	 * @example: `${DELETE_MOVIE_DATA}/${show_id}`
-	 * @example: DELETE_MOVIE_DATA + '/' + show_id
-	 */
-	DELETE_MOVIE_DATA: `${baseUrl}/movie`,
+		return response.data
+	} catch (error) {
+		if (error instanceof AxiosError) {
+			throw new Error(error.message)
+		}
+	}
+}
 
-	GET_SHOW_INDEX: `${baseUrl}/show`,
-	POST_SHOW_INDEX: `${baseUrl}/show`,
-	/**
-	 * Essa rota deve ser acrescida de /:id para buscar uma série específica
-	 * @example: `${GET_SHOW_DATA}/${show_id}`
-	 * @example: GET_SHOW_DATA + '/' + show_id
-	 */
-	GET_SHOW_DATA: `${baseUrl}/show`,
-	/**
-	 * Essa rota deve ser acrescida de /:id para buscar uma série específica
-	 * @example: `${PUT_SHOW_DATA}/${show_id}`
-	 * @example: PUT_SHOW_DATA + '/' + show_id
-	 */
-	PUT_SHOW_DATA: `${baseUrl}/show`,
-	/**
-	 * Essa rota deve ser acrescida de /:id para buscar uma série específica
-	 * @example: `${DELETE_SHOW_DATA}/${show_id}`
-	 * @example: DELETE_SHOW_DATA + '/' + show_id
-	 */
-	DELETE_SHOW_DATA: `${baseUrl}/show`,
+export const updatePreferences = async (selectedPreferences: any[]) => {
+	const response = await axios.post(apiEndpoints.MUTATE_PREFERENCES, selectedPreferences)
 
-	// TEMPORARY
-	GET_PREFERENCES: `${baseUrl}/preferences`,
-	MUTATE_PREFERENCES: `${baseUrl}/user/preferences`
-} as const
+	return response.data
+}
 
-export { apiEndpoints }
+export const getFeed = async () => {
+	const {data: feedData} = await axios.get(apiEndpoints.GET_PREFERENCES)
 
+	return feedData
+}

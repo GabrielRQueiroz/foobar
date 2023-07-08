@@ -1,9 +1,24 @@
-import React from 'react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { FormLogin } from './FormLogin'
+import { MockNextRouter } from '@/../cypress/utils/router'
 
 describe('<FormLogin />', () => {
+  const queryClient = new QueryClient({
+		defaultOptions: {
+			queries: {
+				retry: false
+			}
+		}
+	})
+
+  
   it('renders', () => {
-    // see: https://on.cypress.io/mounting-react
-    cy.mount(<FormLogin />)
+    cy.mount(
+      <MockNextRouter>
+        <QueryClientProvider client={queryClient}>
+          <FormLogin />
+        </QueryClientProvider>
+      </MockNextRouter>
+    )
   })
 })
