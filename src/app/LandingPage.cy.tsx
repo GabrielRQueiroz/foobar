@@ -5,7 +5,6 @@ describe('LandingPage', () => {
 	it('should exists', () => {
 		cy.mount(<LandingPage />)
 
-		// Verify the presence of specific elements
 		cy.get('.card').should('exist')
 		cy.get('button').should('exist')
 		cy.get('p').should('exist')
