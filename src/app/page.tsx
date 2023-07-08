@@ -34,7 +34,7 @@ const LandingPage = () => {
 						<div className="flex w-5/12 pl-0">
 							<div className="relative h-full w-full">
 								<Image
-									className="rounded-br-2xl rounded-tr-2xl object-cover"
+									className="rounded-2xl object-cover"
 									fill
 									src="/Emilia-LandingPage.jpg"
 									alt="Emilia Landing"
