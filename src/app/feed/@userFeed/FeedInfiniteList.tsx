@@ -29,6 +29,9 @@ export const FeedInfiniteList = () => {
 								/>
 							</figure>
 							<div className="card-body">
+                <p className="badge badge-primary">
+                  {suggestion.type}
+                </p>
 								<h5 className="card-title text-sm">{suggestion.title}</h5>
 							</div>
 						</div>
