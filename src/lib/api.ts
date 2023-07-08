@@ -1,6 +1,6 @@
 
 import axios, { AxiosError } from 'axios'
-import {apiEndpoints} from './routes'
+import { apiEndpoints } from './routes'
 
 export const getPreferences = async () => {
 	try {
@@ -21,13 +21,7 @@ export const updatePreferences = async (selectedPreferences: any[]) => {
 }
 
 export const getFeed = async () => {
-	const {data: bookData} = await axios.get(apiEndpoints.GET_BOOK_INDEX)
-	const {data: movieData} = await axios.get(apiEndpoints.GET_MOVIE_INDEX)
-	const {data: showData} = await axios.get(apiEndpoints.GET_SHOW_INDEX)
+	const {data: feedData} = await axios.get(apiEndpoints.GET_PREFERENCES)
 
-	return {
-		books: bookData,
-		movies: movieData,
-		shows: showData
-	}
+	return feedData
 }

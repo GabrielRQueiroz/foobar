@@ -12,8 +12,8 @@ const apiEndpoints = {
 	GET_USER_DATA: `${baseUrl}/user`,
 	POST_USER_SIGN_UP: `${baseUrl}/user`,
 
-	GET_BOOK_INDEX: `${baseUrl}/book`,
-	POST_BOOK_INDEX: `${baseUrl}/book`,
+	GET_BOOK_ALL: `${baseUrl}/book`,
+	POST_BOOK_ALL: `${baseUrl}/book`,
 	/**
 	 * Essa rota deve ser acrescida de /:id para buscar um livro específico
 	 * @example: `${GET_BOOK_DATA}/${book_id}`
@@ -33,8 +33,8 @@ const apiEndpoints = {
 	 */
 	DELETE_BOOK_DATA: `${baseUrl}/book`,
 
-	GET_MOVIE_INDEX: `${baseUrl}/movie`,
-	POST_MOVIE_INDEX: `${baseUrl}/movie`,
+	GET_MOVIE_ALL: `${baseUrl}/movie`,
+	POST_MOVIE_ALL: `${baseUrl}/movie`,
 	/**
 	 * Essa rota deve ser acrescida de /:id para buscar um filme específico
 	 * @example: `${GET_MOVIE_DATA}/${movie_id}`
@@ -54,8 +54,8 @@ const apiEndpoints = {
 	 */
 	DELETE_MOVIE_DATA: `${baseUrl}/movie`,
 
-	GET_SHOW_INDEX: `${baseUrl}/show`,
-	POST_SHOW_INDEX: `${baseUrl}/show`,
+	GET_SHOW_ALL: `${baseUrl}/show`,
+	POST_SHOW_ALL: `${baseUrl}/show`,
 	/**
 	 * Essa rota deve ser acrescida de /:id para buscar uma série específica
 	 * @example: `${GET_SHOW_DATA}/${show_id}`
@@ -75,7 +75,6 @@ const apiEndpoints = {
 	 */
 	DELETE_SHOW_DATA: `${baseUrl}/show`,
 
-	// TEMPORARY
 	GET_PREFERENCES: `${baseUrl}/preferences`,
 	MUTATE_PREFERENCES: `${baseUrl}/user/preferences`
 } as const

@@ -26,44 +26,14 @@ describe('<PreferencesList />', () => {
          </QueryClientProvider>
       )
 
-      cy.intercept('GET', apiEndpoints.GET_BOOK_INDEX)
+      cy.intercept('GET', apiEndpoints.GET_PREFERENCES)
 
       cy.get('[data-cy="feed-card"]').each(
          (card) => {
             cy.wrap(card).should('have.class', 'card')
+            
+            cy.wrap(card).find('[data-cy="feed-card-image"]').should('exist')
          }
       )
    })
-
-   it('renders a list of anchor cards for movies', () => {
-      cy.mount(
-         <QueryClientProvider client={queryClient}>
-            <FeedInfiniteList />
-         </QueryClientProvider>
-      )
-
-      cy.intercept('GET', apiEndpoints.GET_MOVIE_INDEX)
-
-      cy.get('[data-cy="feed-card"]').each(
-         (card) => {
-            cy.wrap(card).should('have.class', 'card')
-         }
-      )
-   })
-
-   it('renders a list of anchor cards for shows', () => {
-      cy.mount(
-         <QueryClientProvider client={queryClient}>
-            <FeedInfiniteList />
-         </QueryClientProvider>
-      )
-
-      cy.intercept('GET', apiEndpoints.GET_SHOW_INDEX)
-
-      cy.get('[data-cy="feed-card"]').each(
-         (card) => {
-            cy.wrap(card).should('have.class', 'card')
-         }
-      )
-   }) 
 })
