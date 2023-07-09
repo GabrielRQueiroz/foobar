@@ -6,6 +6,6 @@ import { ReactNode } from 'react'
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
 	return (
-		<main className='flex h-screen w-full justify-between bg-base-100'>{children}</main>
+		<>{children}</>
 	)
 }
