@@ -21,10 +21,6 @@ export const LayoutUser = () => {
 							{ title: 'O alto da compadecida', gender: 'Comedia', image: '/user_profile.jpg' },
 							{ title: 'O alto da compadecida', gender: 'Comedia', image: '/user_profile.jpg' },
 							{ title: 'O alto da compadecida', gender: 'Comedia', image: '/user_profile.jpg' },
-							{ title: 'O alto da compadecida', gender: 'Comedia', image: '/user_profile.jpg' },
-							{ title: 'O alto da compadecida', gender: 'Comedia', image: '/user_profile.jpg' },
-							{ title: 'O alto da compadecida', gender: 'Comedia', image: '/user_profile.jpg' },
-							{ title: 'O alto da compadecida', gender: 'Comedia', image: '/user_profile.jpg' },
 							{ title: 'O alto da compadecida', gender: 'Comedia', image: '/user_profile.jpg' }
 						]}
 					/>

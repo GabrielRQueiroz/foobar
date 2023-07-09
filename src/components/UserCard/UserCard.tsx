@@ -10,7 +10,7 @@ type UserInformation = {
 const Usercard = ({ nome, email, numeroMatches }: UserInformation) => {
 	return (
 		<>
-			<div className="card w-full justify-start border-2 border-gray-100 bg-base-100 drop-shadow-xl">
+			<div className="card w-full justify-start border-2 border-gray-100 bg-base-100 text-base-content drop-shadow-xl">
 				<div className="flex flex-row justify-between p-8">
 					<div className="flex w-10/12 flex-row gap-8">
 						<div className="w-auto">
@@ -22,8 +22,8 @@ const Usercard = ({ nome, email, numeroMatches }: UserInformation) => {
 								<p>{email}</p>
 							</div>
 
-							<div className="bg-black-900 flex flex h-12 w-36 items-center justify-center rounded-lg bg-black">
-								<p className="text-white">{numeroMatches} matches</p>
+							<div className="bg-black-900 flex h-12 w-36 items-center justify-center rounded-lg bg-black">
+								<p className='text-white'>{numeroMatches} matches</p>
 							</div>
 						</div>
 					</div>
