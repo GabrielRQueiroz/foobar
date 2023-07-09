@@ -1,7 +1,6 @@
 import React from 'react'
 import Usercard from './UserCard'
 
-
 describe('Usercard Component', () => {
 	const user = {
 		nome: 'John Doe',
