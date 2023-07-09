@@ -58,7 +58,7 @@ describe('Check the registration page', () => {
 		cy.wait(500)
 	})
 
-	it('submit', () => {
+	it('Submit', () => {
 		cy.visit('/registro')
 		cy.get('[data-cy="name"]').type(testname, { delay: 150 })
 		cy.get('[data-cy="email"]').type(testemail, { delay: 150 })
