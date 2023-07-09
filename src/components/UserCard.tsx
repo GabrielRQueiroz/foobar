@@ -1,30 +1,30 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-export const Usercard = () => {
+type UserInformation = {
+	nome: string
+	email: string
+	numeroMatches: number
+}
+
+const Usercard = ({ nome, email, numeroMatches }: UserInformation) => {
 	return (
 		<>
 			<div className="card w-full justify-start border-2 border-gray-100 bg-base-100 drop-shadow-xl">
 				<div className="flex flex-row justify-between p-8">
 					<div className="flex w-10/12 flex-row gap-8">
 						<div className="w-auto">
-							<Image
-								className="rounded-full"
-								width={150}
-								height={150}
-								src="/user_profile.jpg"
-								alt="user profile"
-							/>
+							<Image className="rounded-full" width={150} height={150} src="/user_profile.jpg" alt="user profile" />
 						</div>
 						<div className="flex flex-col justify-between py-4">
 							<div className="flex flex-col justify-center gap-2 ">
-								<p>Olá, usuário!</p>
-								<p>email@hotmail.com.br</p>
+								<p>Olá, {nome}!</p>
+								<p>{email}</p>
 							</div>
 
 							<div className="flex justify-center">
 								<button className="btn w-full rounded-lg text-lg normal-case">
-									<Link href="/registro">20 matches</Link>
+									<Link href="/registro">{numeroMatches} matches</Link>
 								</button>
 							</div>
 						</div>
@@ -38,6 +38,5 @@ export const Usercard = () => {
 			</div>
 		</>
 	)
-   
 }
 export default Usercard
