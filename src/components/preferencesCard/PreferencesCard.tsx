@@ -18,7 +18,7 @@ const PreferencesCard = ({ preferences }: PreferencesCardTypes) => {
 					<div className="flex flex-row justify-between">
 						<h1 className="text-xl">Minhas Preferências</h1>
 						<div className="flex w-2/12">
-							<button className="btn w-[10vw] rounded-lg text-[0.8vw] normal-case">
+							<button className="btn w-[10vw] rounded-lg text-[0.8vw] normal-case text-white bg-black">
 								<Link href="/registro">Editar preferências</Link>
 							</button>
 						</div>
@@ -28,7 +28,7 @@ const PreferencesCard = ({ preferences }: PreferencesCardTypes) => {
 							{preferences.map((value, index) => (
 								<div key={index} className="mx-2 justify-start ">
 									{/* trocar a linha abaixo pelo componente de preferencias */}
-									<div className="card h-32 w-32 justify-start border-2 border-gray-100 bg-base-100 drop-shadow-xl"/>
+									<div className="card h-32 w-32 justify-start border-2 border-gray-100 bg-base-100 drop-shadow-xl" />
 								</div>
 							))}
 						</div>

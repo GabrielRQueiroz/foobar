@@ -22,13 +22,13 @@ const Usercard = ({ nome, email, numeroMatches }: UserInformation) => {
 								<p>{email}</p>
 							</div>
 
-							<div className="bg-black-900 flex h-12 w-36 items-center justify-center rounded-lg bg-black">
-								<p className='text-white'>{numeroMatches} matches</p>
+							<div className="bg-black-900 flex h-12 w-36 items-center justify-center rounded-lg bg-base-200">
+								<p className="text-black">{numeroMatches} matches</p>
 							</div>
 						</div>
 					</div>
 					<div className="flex w-2/12">
-						<button className="btn w-[10vw] rounded-lg text-[0.9vw] normal-case">
+						<button className="btn w-[10vw] rounded-lg bg-black text-[0.9vw] normal-case text-white">
 							<Link href="/registro">Editar perfil</Link>
 						</button>
 					</div>
