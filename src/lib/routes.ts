@@ -2,6 +2,9 @@ const baseUrl = process.env.NEXT_PUBLIC_API_URL
 
 const apiEndpoints = {
 	BASE_URL: `${baseUrl}`,
+
+	// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= AUTH -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 	POST_USER_LOGIN: `${baseUrl}/auth/login`,
 	POST_USER_LOGOUT: `${baseUrl}/auth/logout`,
 	/**
@@ -12,8 +15,10 @@ const apiEndpoints = {
 	GET_USER_DATA: `${baseUrl}/user`,
 	POST_USER_SIGN_UP: `${baseUrl}/user`,
 
-	GET_BOOK_ALL: `${baseUrl}/book`,
-	POST_BOOK_ALL: `${baseUrl}/book`,
+	// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= BOOKS -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+	GET_ALL_BOOK: `${baseUrl}/book`,
+	POST_BOOK: `${baseUrl}/book`,
 	/**
 	 * Essa rota deve ser acrescida de /:id para buscar um livro específico
 	 * @example: `${GET_BOOK_DATA}/${book_id}`
@@ -33,8 +38,10 @@ const apiEndpoints = {
 	 */
 	DELETE_BOOK_DATA: `${baseUrl}/book`,
 
-	GET_MOVIE_ALL: `${baseUrl}/movie`,
-	POST_MOVIE_ALL: `${baseUrl}/movie`,
+	// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= MOVIES -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+	GET_ALL_MOVIE: `${baseUrl}/movie`,
+	POST_MOVIE: `${baseUrl}/movie`,
 	/**
 	 * Essa rota deve ser acrescida de /:id para buscar um filme específico
 	 * @example: `${GET_MOVIE_DATA}/${movie_id}`
@@ -54,8 +61,10 @@ const apiEndpoints = {
 	 */
 	DELETE_MOVIE_DATA: `${baseUrl}/movie`,
 
-	GET_SHOW_ALL: `${baseUrl}/show`,
-	POST_SHOW_ALL: `${baseUrl}/show`,
+	// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= SHOWS -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+	GET_ALL_SHOW: `${baseUrl}/show`,
+	POST_SHOW: `${baseUrl}/show`,
 	/**
 	 * Essa rota deve ser acrescida de /:id para buscar uma série específica
 	 * @example: `${GET_SHOW_DATA}/${show_id}`
@@ -75,8 +84,12 @@ const apiEndpoints = {
 	 */
 	DELETE_SHOW_DATA: `${baseUrl}/show`,
 
-	GET_PREFERENCES: `${baseUrl}/preferences`,
-	MUTATE_PREFERENCES: `${baseUrl}/user/preferences`
+	// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= PREFERENCES -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+	GET_PREFERENCES: `${baseUrl}/user/match`,
+	MUTATE_BOOKS_PREFERENCES: `${baseUrl}/user/connect_to_books`,
+	MUTATE_MOVIES_PREFERENCES: `${baseUrl}/user/connect_to_movies`,
+	MUTATE_SHOWS_PREFERENCES: `${baseUrl}/user/connect_to_shows`
 } as const
 
 export { apiEndpoints }
