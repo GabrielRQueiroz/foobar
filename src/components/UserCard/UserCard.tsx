@@ -1,5 +1,6 @@
+'use client'
 import Image from 'next/image'
-import Link from 'next/link'
+import PopUpUserEditInfo from '../PopUpUserEditInfo/PopUpUserEditInfo'
 
 type UserInformation = {
 	nome: string
@@ -28,9 +29,7 @@ const Usercard = ({ nome, email, numeroMatches }: UserInformation) => {
 						</div>
 					</div>
 					<div className="flex w-2/12">
-						<button className="btn w-[10vw] rounded-lg bg-black text-[0.9vw] normal-case text-white">
-							<Link href="/registro">Editar perfil</Link>
-						</button>
+						<PopUpUserEditInfo/>
 					</div>
 				</div>
 			</div>
