@@ -1,4 +1,4 @@
-import Usercard from "@/components/UserCard"
+import Usercard from "@/components/UserCard/UserCard"
 export const LayoutUser = () => {
 	return (
 		<div className="flex h-fit w-8/12 flex-col">
