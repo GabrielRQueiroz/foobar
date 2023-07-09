@@ -1,15 +1,13 @@
 'use client'
-import { apiEndpoints } from '@/lib/routes'
+import { useAuth } from '@/hooks/useAuth'
 import { useMutation } from '@tanstack/react-query'
-import axios from 'axios'
 import clsx from 'clsx'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 import * as Yup from 'yup'
 
-const sendUserSignIn = async (fields: FieldsType) => {
-	return axios.post(apiEndpoints.POST_USER_LOGIN, fields)
-}
 
 type FieldsType = {
 	email: string
@@ -17,6 +15,7 @@ type FieldsType = {
 }
 
 export const FormLogin = () => {
+	const {user, sendUserSignIn} = useAuth()
 	const router = useRouter()
 	const { mutate, isError, isLoading, isSuccess } = useMutation({
 		mutationFn: sendUserSignIn,
@@ -24,6 +23,11 @@ export const FormLogin = () => {
 			router.push('/feed')
 		}
 	})
+	
+	useEffect(() => {
+		user && router.push("/feed")
+	})
+
 	return (
 		<div className="m-auto flex items-center justify-center">
 			<Formik
@@ -47,9 +51,9 @@ export const FormLogin = () => {
 							<p className="bold text-xl">Entrar no App</p>
 							<br />
 							<span>ou </span>
-							<a className="text-[#4F75FF] underline" href="/registro">
+							<Link  className="text-[#4F75FF] underline" href="/registro">
 								criar uma conta
-							</a>
+							</Link>
 						</div>
 						{isError && (
 							<div>
@@ -85,7 +89,7 @@ export const FormLogin = () => {
 							<ErrorMessage name="password" component="div" className="invalid-feedback text-sm text-error" />
 						</div>
 						<div className="p-2">
-							<button type="submit" disabled={(isLoading || isSuccess)} className="btn-primary btn mr-2 w-full text-primary-content">
+							<button type="submit" disabled={(isLoading || isSuccess || !!user)} className="btn-primary btn mr-2 w-full text-primary-content">
 								{(isLoading || isSuccess) ? (
 									<span className="loading loading-spinner loading-md" />
 								) :"Entrar"}

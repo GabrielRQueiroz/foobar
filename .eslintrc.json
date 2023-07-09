@@ -1,45 +1,40 @@
 {
- "plugins": [
-  "cypress",
-  "react",
-  "import",
-  "jsx-a11y",
-  "@tanstack/query"
- ],
- "extends": [
-  "next/core-web-vitals",
-  "plugin:cypress/recommended",
-  "eslint:recommended",
-  "plugin:import/errors",
-  "plugin:react/recommended",
-  "plugin:jsx-a11y/recommended",
-  "plugin:react-hooks/recommended",
-  "plugin:@tanstack/eslint-plugin-query/recommended",
-  "prettier",
-  "plugin:storybook/recommended"
- ],
- "rules": {
-  "react/prop-types": "off",
-  "react/jsx-uses-react": "off",
-  "react/react-in-jsx-scope": "off",
-  "react/self-closing-comp": "warn"
- },
- "parserOptions": {
-  "ecmaVersion": 2023,
-  "sourceType": "module",
-  "ecmaFeatures": {
-   "jsx": true
-  }
- },
- "env": {
-  "es6": true,
-  "browser": true,
-  "jest": true,
-  "node": true
- },
- "settings": {
-  "react": {
-   "version": "detect"
-  }
- }
+	"plugins": ["cypress", "react", "import", "jsx-a11y", "@tanstack/query"],
+	"extends": [
+		"next/core-web-vitals",
+		"plugin:cypress/recommended",
+		"eslint:recommended",
+		"plugin:import/errors",
+		"plugin:react/recommended",
+		"plugin:jsx-a11y/recommended",
+		"plugin:react-hooks/recommended",
+		"plugin:@tanstack/eslint-plugin-query/recommended",
+		"prettier",
+		"plugin:storybook/recommended"
+	],
+	"rules": {
+		"react/prop-types": "off",
+		"react/jsx-uses-react": "off",
+		"react/react-in-jsx-scope": "off",
+		"no-unused-vars": "warn",
+		"react/self-closing-comp": "warn"
+	},
+	"parserOptions": {
+		"ecmaVersion": 2023,
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"jsx": true
+		}
+	},
+	"env": {
+		"es6": true,
+		"browser": true,
+		"jest": true,
+		"node": true
+	},
+	"settings": {
+		"react": {
+			"version": "detect"
+		}
+	}
 }

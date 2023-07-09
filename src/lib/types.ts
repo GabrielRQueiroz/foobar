@@ -1,10 +1,8 @@
 export type User = {
-	id: number
-	name: string
-	email: string
-	password: string
-	created_at: string
-	isAdmin: boolean
+	user_id: number
+	user_name: string
+	auth_token: string
+	exp: string
 }
 
 export type Tag = {

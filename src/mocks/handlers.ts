@@ -8,7 +8,13 @@ export const handlers = [
 
 		return res(ctx.status(200), ctx.json([...preferencesData, ...preferencesData] as any[]))
 	}),
-	rest.post(apiEndpoints.MUTATE_PREFERENCES, (req, res, ctx) => {
+	rest.post(apiEndpoints.MUTATE_BOOKS_PREFERENCES, (req, res, ctx) => {
+		return res(ctx.status(200), ctx.json({ success: true }))
+	}),
+	rest.post(apiEndpoints.MUTATE_MOVIES_PREFERENCES, (req, res, ctx) => {
+		return res(ctx.status(200), ctx.json({ success: true }))
+	}),
+	rest.post(apiEndpoints.MUTATE_SHOWS_PREFERENCES, (req, res, ctx) => {
 		return res(ctx.status(200), ctx.json({ success: true }))
 	})
 ]
