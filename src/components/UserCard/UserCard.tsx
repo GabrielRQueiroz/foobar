@@ -21,11 +21,9 @@ const Usercard = ({ nome, email, numeroMatches }: UserInformation) => {
 								<p>Olá, {nome}!</p>
 								<p>{email}</p>
 							</div>
-
-							<div className="flex justify-center">
-								<button className="btn w-full rounded-lg text-lg normal-case">
-									<Link href="/registro">{numeroMatches} matches</Link>
-								</button>
+							
+							<div className="bg-black-900 w-36 flex flex h-12 items-center justify-center rounded-lg bg-black">
+								<p className="text-white">{numeroMatches} matches</p>
 							</div>
 						</div>
 					</div>
