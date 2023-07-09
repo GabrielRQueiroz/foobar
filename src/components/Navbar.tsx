@@ -1,13 +1,13 @@
-/* eslint-disable */
 import Image from 'next/image'
+import Link from 'next/link'
 
 export const Navbar = () => {
 	return (
-		<div className="rigth-0 navbar fixed left-0 top-0 bg-base-100">
+		<nav className="navbar fixed left-0 right-0 top-0 z-50 bg-base-100 text-base-content">
 			<div className="flex-1">
-				<a href="/" className="btn-ghost btn text-xl normal-case">
+				<Link href="/feed" className="btn-ghost btn text-xl normal-case">
 					Re:Match
-				</a>
+				</Link>
 			</div>
 			<div className="flex-none">
 				{/* <div className="dropdown-end dropdown">
@@ -41,22 +41,24 @@ export const Navbar = () => {
 					</div>
 				</div> */}
 				<div className="dropdown-end dropdown">
-					<label tabIndex={0} className="btn-ghost btn-circle avatar btn">
+					<button type="button" tabIndex={0} className="btn-ghost btn-circle avatar btn">
 						<div className="w-10 rounded-full">
 							<Image src="/IconPerson.png" width={40} height={0} alt="IconPerson" />
 						</div>
-					</label>
-					<ul tabIndex={0} className="dropdown-content menu rounded-box menu-sm z-[1] mt-3 w-52 bg-base-100 p-2 shadow">
+					</button>
+					<ul className="dropdown-content menu rounded-box menu-sm mt-3 w-52 bg-base-100 p-2 shadow">
 						<li>
-							<a className="justify-between">Perfil</a>
+							{/* <Link href={`/${user.id}`} className="justify-between">Perfil</Link> */}
+							<Link href={`/user`} className="justify-between">
+								Perfil
+							</Link>
 						</li>
 						<li>
-							<a>Desconectar</a>
+							<button type="button">Desconectar</button>
 						</li>
 					</ul>
 				</div>
 			</div>
-		</div>
+		</nav>
 	)
 }
-/* eslint-enable */

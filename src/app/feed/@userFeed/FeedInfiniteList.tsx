@@ -11,16 +11,16 @@ export const FeedInfiniteList = () => {
 	})
 
 	return (
-		<div>
+		<>
 			{feedData ? (
-				<div className="grid max-w-7xl grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 xl:gap-x-8">
+				<div className="grid py-16 max-w-7xl grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 xl:gap-x-8">
 					{feedData.map((suggestion: any, index: number) => (
 						<div
 							data-cy="feed-card"
-							className="card-compact card max-w-xs bg-transparent"
+							className="card-compact card max-w-xs text-base-content shadow"
 							key={`${suggestion.id}-${suggestion.title}-${index}`}
 						>
-							<figure className="relative aspect-square w-full">
+							<figure className="relative aspect-square w-full pointer-events-none">
 								<Image
 									data-cy="feed-card-image"
 									fill
@@ -29,17 +29,15 @@ export const FeedInfiniteList = () => {
 								/>
 							</figure>
 							<div className="card-body">
-                <p className="badge badge-primary">
-                  {suggestion.type}
-                </p>
+								<p className="badge badge-neutral">{suggestion.type}</p>
 								<h5 className="card-title text-sm">{suggestion.title}</h5>
 							</div>
 						</div>
 					))}
 				</div>
 			) : (
-				''
+				'Loading...'
 			)}
-		</div>
+		</>
 	)
 }

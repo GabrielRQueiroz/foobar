@@ -1,4 +1,4 @@
-import { Navbar, ThemeSwitcher } from '@/components'
+import { ThemeSwitcher } from '@/components'
 import { QueryProviders } from '@/utils/queryProvider'
 //import axios from 'axios'
 import { MockWorker } from '@/utils/mockWorker'
@@ -20,7 +20,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 			<MockWorker>
 				<body className={inter.className}>
 					<QueryProviders>
-						<Navbar />
 						{children}
 					</QueryProviders>
 					<ThemeSwitcher />
