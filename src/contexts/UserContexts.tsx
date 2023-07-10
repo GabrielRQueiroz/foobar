@@ -3,7 +3,7 @@
 import { apiEndpoints } from '@/lib/routes'
 import { User } from '@/lib/types'
 import axios, { type AxiosResponse } from 'axios'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { ReactNode, createContext, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
@@ -20,6 +20,7 @@ export const UserContext = createContext({} as UserContextTypes)
 export const UserContextProvider = ({ children }: { children: ReactNode }) => {
 	const [user, setUser] = useState<UserContextTypes['user']>(null)
 	const router = useRouter()
+	const pathname = usePathname()
 
 	useEffect(() => {
 		const user = localStorage.getItem('user')
@@ -30,22 +31,28 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
 
 			if (user_expire_date > now) {
 				setUser(JSON.parse(user))
-				router.push('/feed')
+
+				if (['/login', '/register'].includes(pathname)) {
+					router.push('/feed/books')
+				}
+
 				return
-			} else {
-				toast.error('Sua sessão expirou, faça login novamente.')
 			}
+
+			toast.error('Sua sessão expirou, faça login novamente.')
 		}
 
-		router.push('/login')
+		if (!['/login', '/register', '/'].includes(pathname)) {
+			router.push('/login')
+		}
 	}, [router])
 
 	useEffect(() => {
-		if (user) {
+		if (user && ['/login', '/register'].includes(pathname)) {
 			localStorage.setItem('user', JSON.stringify(user))
-			router.push('/feed')
-		} else {
-			localStorage.removeItem('user')
+			router.push('/feed/books')
+			return
+		} else if (!user && !['/login', '/register', '/'].includes(pathname)) {
 			router.push('/login')
 		}
 	}, [user, router])

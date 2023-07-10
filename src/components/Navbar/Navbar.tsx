@@ -4,9 +4,9 @@ import { UserAvatar } from './UserAvatar'
 
 export const Navbar = () => {
 	return (
-		<nav className="navbar fixed left-0 right-0 top-0 z-50 bg-base-100 text-base-content">
+		<nav className="navbar sticky left-0 right-0 top-0 z-50 bg-base-100 text-base-content">
 			<div className="flex-1">
-				<Link href="/feed" className="btn-ghost btn text-xl normal-case">
+				<Link href="/feed/books" className="btn-ghost btn text-xl normal-case">
 					Re:Match
 				</Link>
 			</div>

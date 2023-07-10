@@ -86,7 +86,10 @@ const apiEndpoints = {
 
 	// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= PREFERENCES -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-	GET_PREFERENCES: `${baseUrl}/user/match`,
+	GET_BOOKS_PREFERENCES: `${baseUrl}/user/match_books`,
+	GET_MOVIES_PREFERENCES: `${baseUrl}/user/match_movies`,
+	GET_SHOWS_PREFERENCES: `${baseUrl}/user/match_shows`,
+
 	MUTATE_BOOKS_PREFERENCES: `${baseUrl}/user/connect_to_books`,
 	MUTATE_MOVIES_PREFERENCES: `${baseUrl}/user/connect_to_movies`,
 	MUTATE_SHOWS_PREFERENCES: `${baseUrl}/user/connect_to_shows`

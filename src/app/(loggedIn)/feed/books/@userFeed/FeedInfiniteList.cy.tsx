@@ -26,7 +26,7 @@ describe('<PreferencesList />', () => {
          </QueryClientProvider>
       )
 
-      cy.intercept('GET', apiEndpoints.GET_PREFERENCES)
+      cy.intercept('GET', apiEndpoints.GET_BOOKS_PREFERENCES)
 
       cy.get('[data-cy="feed-card"]').each(
          (card) => {
