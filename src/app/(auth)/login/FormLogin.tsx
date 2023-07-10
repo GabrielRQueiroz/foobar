@@ -20,12 +20,12 @@ export const FormLogin = () => {
 	const { mutate, isError, isLoading, isSuccess } = useMutation({
 		mutationFn: sendUserSignIn,
 		onSuccess: () => {
-			router.push('/feed')
+			router.push('/feed/books')
 		}
 	})
 	
 	useEffect(() => {
-		user && router.push("/feed")
+		user && router.push("/feed/books")
 	})
 
 	return (

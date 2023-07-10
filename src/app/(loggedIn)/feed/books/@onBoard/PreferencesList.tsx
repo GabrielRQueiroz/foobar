@@ -1,5 +1,6 @@
 'use client'
-import { getPreferences, updatePreferences } from '@/lib/api'
+import { useAuth } from '@/hooks/useAuth'
+import { getAllBooks, updateBookPreferences } from '@/lib/api'
 import { Check } from '@phosphor-icons/react'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import clsx from 'clsx'
@@ -8,19 +9,20 @@ import { useState } from 'react'
 import toast from 'react-hot-toast'
 
 export const PreferencesList = () => {
+	const { user } = useAuth()
 	const { data: preferences, isLoading } = useQuery({
-		queryKey: ['onboarding'],
-		queryFn: getPreferences
+		queryKey: ['onboarding', 'books'],
+		queryFn: getAllBooks
 	})
 	const {
 		mutate,
 		isLoading: mutationIsLoading,
 		isSuccess: mutationIsSuccess,
 		isError: mutationIsError
-	} = useMutation({ mutationFn: updatePreferences })
-	const [selectedPreferences, setSelectedPreferences] = useState<string[]>([])
+	} = useMutation({ mutationKey: ['preference_update', 'books'], mutationFn: updateBookPreferences })
+	const [selectedPreferences, setSelectedPreferences] = useState<number[]>([])
 
-	const handlePreferenceSelection = async (preferenceId: string) => {
+	const handlePreferenceSelection = async (preferenceId: number) => {
 		const newSelectionList = selectedPreferences.includes(preferenceId)
 			? selectedPreferences.filter(id => id !== preferenceId)
 			: [...selectedPreferences, preferenceId]
@@ -35,7 +37,9 @@ export const PreferencesList = () => {
 	}
 
 	const handlePreferencesSubmit = async () => {
-		mutate(selectedPreferences)
+		selectedPreferences.forEach(preferenceId => {
+			mutate({ userId: user?.user_id, preferenceId })
+		})
 
 		if (mutationIsSuccess) {
 			toast.success('Suas preferências foram salvas 😉')
@@ -69,7 +73,7 @@ export const PreferencesList = () => {
 									handlePreferenceSelection(preference.id)
 								}}
 								className="indicator aspect-square flex-1 basis-1/4 md:basis-1/5"
-								key={`${preference.id + index}-${preference.title}`}
+								key={`${preference.id + index}-${index}`}
 							>
 								<span
 									data-cy="preference-card-checked"
@@ -83,16 +87,21 @@ export const PreferencesList = () => {
 								<div
 									data-cy="preference-card"
 									className={clsx(
-										'card-compact card image-full h-full w-full shadow-xl',
+										'card image-full card-compact h-full w-full shadow-xl',
 										selectedPreferences.includes(preference.id) && 'border border-primary'
 									)}
 								>
 									<figure className="relative">
 										<div className="bg-black-900 absolute left-0 top-0 h-full w-full opacity-50" />
-										<Image fill className="object-cover" src={preference.image} alt="Shoes" />
+										<Image
+											fill
+											className="object-cover"
+											src={`https://picsum.photos/seed/${preference.id}-${index}/200`}
+											alt="Shoes"
+										/>
 									</figure>
 									<div className="card-body">
-										<h2 className="card-title">{preference.title}</h2>
+										{/* <h2 className="card-title">{preference.title}</h2> */}
 										<p>{preference.id}</p>
 									</div>
 								</div>

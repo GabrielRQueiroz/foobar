@@ -22,12 +22,12 @@ export const FormRegistro = () => {
 	const { mutate, isError, isLoading, isSuccess, error } = useMutation({
 		mutationFn: sendUserSignUp,
 		onSuccess: () => {
-			router.push('/feed')
+			router.push('/feed/books')
 		}
 	})
 
 	useEffect(() => {
-		user && router.push("/feed")
+		user && router.push("/feed/books")
 	})
 	
 	return (
