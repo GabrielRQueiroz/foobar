@@ -6,7 +6,7 @@ import { ThumbsUp } from '@phosphor-icons/react'
 import { useMutation } from '@tanstack/react-query'
 import Image from 'next/image'
 
-export const ItemCard = ({ suggestion }: { suggestion: any }) => {
+export const ItemCard = ({ suggestion, onMatch }: { suggestion: any; onMatch: () => void }) => {
 	const { user } = useAuth()
 	const { mutate } = useMutation({
 		mutationKey: ['preference_update', 'books'],
@@ -37,6 +37,7 @@ export const ItemCard = ({ suggestion }: { suggestion: any }) => {
 								userId: user?.user_id,
 								preferenceId: suggestion.id
 							})
+							onMatch()
 						}}
 					>
 						<ThumbsUp size={24} />

@@ -3,18 +3,18 @@ import { apiEndpoints } from '../lib/routes'
 import { preferencesData } from './constants/preferences'
 
 export const handlers = [
-	rest.get(apiEndpoints.GET_BOOKS_PREFERENCES, (req, res, ctx) => {
-		// const limit = Number(req.url.searchParams.get('limit'))
+	// rest.get(apiEndpoints.GET_BOOKS_PREFERENCES, (req, res, ctx) => {
+	// 	// const limit = Number(req.url.searchParams.get('limit'))
 		
-		return res(ctx.status(200), ctx.json({
-			books: [
-				...preferencesData.books,
-				...preferencesData.books,
-				...preferencesData.books,
-				...preferencesData.books,
-			]
-		}))
-	}),
+	// 	return res(ctx.status(200), ctx.json({
+	// 		books: [
+	// 			...preferencesData.books,
+	// 			...preferencesData.books,
+	// 			...preferencesData.books,
+	// 			...preferencesData.books,
+	// 		]
+	// 	}))
+	// }),
 	rest.get(apiEndpoints.GET_MOVIES_PREFERENCES, (req, res, ctx) => {
 		// const limit = Number(req.url.searchParams.get('limit'))
 		
@@ -78,9 +78,9 @@ export const handlers = [
 
 		return res(ctx.status(200), ctx.json(bookList as any[]))
 	}),
-	rest.post(apiEndpoints.MUTATE_BOOKS_PREFERENCES, (req, res, ctx) => {
-		return res(ctx.status(200), ctx.json({ success: true }))
-	}),
+	// rest.post(apiEndpoints.MUTATE_BOOKS_PREFERENCES, (req, res, ctx) => {
+	// 	return res(ctx.status(200), ctx.json({ success: true }))
+	// }),
 	rest.post(apiEndpoints.MUTATE_MOVIES_PREFERENCES, (req, res, ctx) => {
 		return res(ctx.status(200), ctx.json({ success: true }))
 	}),
