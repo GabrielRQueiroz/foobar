@@ -1,5 +1,5 @@
 import { rest } from 'msw'
-import { apiEndpoints } from '@/lib/routes'
+import { apiEndpoints } from '../lib/routes'
 import { preferencesData } from './constants/preferences'
 
 export const handlers = [

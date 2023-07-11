@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+import { apiEndpoints } from "../../../src/lib/routes"
+
 const testEmailLogin = `may3@gmail.com`
 const testPassword = `123456`
 
@@ -58,7 +60,7 @@ describe('Check the registration page', () => {
 		cy.get('[data-cy="email"]').type(testEmailLogin, { delay: 150 })
 		cy.get('[data-cy="password"]').type(testPassword, { delay: 150 })
 		cy.get('[data-cy="submit"]').click()
-		cy.intercept('http://localhost/3000').as('postUser')
+		cy.intercept(apiEndpoints.BASE_URL).as('postUser')
 		cy.wait(3000)
 		cy.url().should('include', '/feed')
 		cy.wait(5000)

@@ -32,7 +32,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
 			if (user_expire_date > now) {
 				setUser(JSON.parse(user))
 
-				if (['/login', '/register'].includes(pathname)) {
+				if (['/login', '/registro'].includes(pathname)) {
 					router.push('/feed/books')
 				}
 
@@ -42,17 +42,17 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
 			toast.error('Sua sessão expirou, faça login novamente.')
 		}
 
-		if (!['/login', '/register', '/'].includes(pathname)) {
+		if (!['/login', '/registro', '/'].includes(pathname)) {
 			router.push('/login')
 		}
 	}, [router])
 
 	useEffect(() => {
-		if (user && ['/login', '/register'].includes(pathname)) {
+		if (user && ['/login', '/registro'].includes(pathname)) {
 			localStorage.setItem('user', JSON.stringify(user))
 			router.push('/feed/books')
 			return
-		} else if (!user && !['/login', '/register', '/'].includes(pathname)) {
+		} else if (!user && !['/login', '/registro', '/'].includes(pathname)) {
 			router.push('/login')
 		}
 	}, [user, router])

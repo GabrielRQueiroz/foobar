@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+import { apiEndpoints } from "../../../src/lib/routes"
+
 const uuid = () => Cypress._.random(0, 1e6)
 const id = uuid()
 const testname = `testname${id}`
@@ -65,7 +67,7 @@ describe('Check the registration page', () => {
 		cy.get('[data-cy="password"]').type('123456', { delay: 150 })
 		cy.get('[data-cy="confirmPassword"]').type('123456', { delay: 150 })
 		cy.get('[data-cy="submit"]').click()
-		cy.intercept('http://localhost/3000').as('postUser')
+		cy.intercept(apiEndpoints.BASE_URL).as('postUser')
 		cy.wait(3000)
 		cy.url().should('include', '/login')
 		cy.wait(5000)
