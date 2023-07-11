@@ -18,6 +18,8 @@ import { worker } from '../../src/mocks/browser'
 import './commands'
 
 Cypress.on('test:before:run:async', async () => {
+	localStorage.removeItem("user")
+
 	await worker.start()
 })
 // Alternatively you can use CommonJS syntax:

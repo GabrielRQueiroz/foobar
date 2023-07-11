@@ -105,7 +105,11 @@ export const getAllShows = async () => {
 }
 
 export const getUserData = async (user_id: User["user_id"]) => {
-	const {data: userData} = await axios.get(`${apiEndpoints.GET_USER_DATA}/${user_id}`)
+	const {data: userData, status} = await axios.get(`${apiEndpoints.GET_USER_DATA}/${user_id}`)
 
+	if (status !== 200) {
+		localStorage.removeItem("user")
+	}
+	
 	return userData
 }
