@@ -69,7 +69,7 @@ describe('Check the registration page', () => {
 		cy.get('[data-cy="submit"]').click()
 		cy.intercept(apiEndpoints.BASE_URL).as('postUser')
 		cy.wait(3000)
-		cy.url().should('include', '/login')
+		cy.url().should('include', '/feed')
 		cy.wait(5000)
 	})
 
