@@ -26,7 +26,7 @@ describe('<PreferencesList />', () => {
 			</QueryClientProvider>
 		)
 
-		cy.intercept('GET', apiEndpoints.GET_PREFERENCES)
+		cy.intercept('GET', apiEndpoints.GET_BOOKS_PREFERENCES)
 
 		cy.get('[data-cy="preferences-list"]').children().should('have.lengthOf.within', 6, 32)
 
@@ -42,6 +42,6 @@ describe('<PreferencesList />', () => {
 
 		cy.get('[data-cy="submit-btn"]').click()
 
-		cy.intercept('POST', apiEndpoints.MUTATE_PREFERENCES)
+		cy.intercept('POST', apiEndpoints.MUTATE_BOOKS_PREFERENCES)
 	})
 })

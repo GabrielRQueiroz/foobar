@@ -24,7 +24,7 @@ export const FormUserEditInfo = () => {
 	const { mutate, isError, isLoading, isSuccess } = useMutation({
 		mutationFn: sendUserSignIn,
 		onSuccess: () => {
-			router.push('/feed')
+			router.push('/feed/books')
 		}
 	})
 	return (

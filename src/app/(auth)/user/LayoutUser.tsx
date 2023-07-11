@@ -1,5 +1,5 @@
 import Usercard from "@/components/UserCard/UserCard"
-import PreferencesCard from "@/components/preferencesCard/PreferencesCard"
+import PreferencesCard from "@/components/PreferencesCard/PreferencesCard"
 export const LayoutUser = () => {
 	return (
 		<>
