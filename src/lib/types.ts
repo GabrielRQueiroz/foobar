@@ -13,6 +13,9 @@ export type Tag = {
 export type Movie = {
 	id: number
 	name: string
+	author: string
+	year: number
+	tag_name: string
 }
 
 export type MovieTag = {
@@ -28,6 +31,9 @@ export type UserMovie = {
 export type Book = {
 	id: number
 	name: string
+	author: string
+	year: number
+	tag_name: string
 }
 
 export type BookTag = {
@@ -43,6 +49,9 @@ export type UserBook = {
 export type Show = {
 	id: number
 	name: string
+	author: string
+	year: number
+	tag_name: string
 }
 
 export type Group = {

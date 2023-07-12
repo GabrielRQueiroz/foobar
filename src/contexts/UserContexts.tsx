@@ -18,7 +18,7 @@ type UserContextTypes = {
 export const UserContext = createContext({} as UserContextTypes)
 
 export const UserContextProvider = ({ children }: { children: ReactNode }) => {
-	const [user, setUser] = useState<UserContextTypes['user']>(null)
+	const [user, setUser] = useState<UserContextTypes['user']>(JSON.parse(localStorage.getItem('user') || ''))
 	const router = useRouter()
 	const pathname = usePathname()
 
@@ -40,9 +40,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
 			}
 
 			toast.error('Sua sessão expirou, faça login novamente.')
-		}
-
-		if (!['/login', '/registro', '/'].includes(pathname)) {
+		} else if (!['/login', '/registro', '/'].includes(pathname) && !user) {
 			router.push('/login')
 		}
 	}, [router])
