@@ -3,8 +3,8 @@
 import { useAuth } from '@/hooks/useAuth'
 import { getFeed } from '@/lib/api'
 import { useQuery } from '@tanstack/react-query'
-import { ItemCard } from '../../ItemCard'
 import { useRouter } from 'next/navigation'
+import { ItemCard } from '../../ItemCard'
 
 export const FeedInfiniteList = () => {
 	const { user } = useAuth()
@@ -14,7 +14,7 @@ export const FeedInfiniteList = () => {
 		queryFn: () => getFeed(user?.user_id, 'MOVIES'),
 		enabled: !!user?.user_id,
 		onError: () => {
-			typeof window !== 'undefined' && localStorage.removeItem('user')
+			localStorage.removeItem('user')
 			router.replace('/login')
 		}
 	})
@@ -22,9 +22,14 @@ export const FeedInfiniteList = () => {
 	return (
 		<>
 			{feedData ? (
-				<div className="grid max-w-7xl grid-cols-1 ip3:grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 xl:gap-x-8 w-full">
+				<div className="grid w-full max-w-7xl grid-cols-1 gap-x-4 gap-y-6 ip3:grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 xl:gap-x-8">
 					{feedData.map((suggestion: any, index: number) => (
-						<ItemCard key={`${suggestion.id}-${suggestion.name}-${index}`} onMatch={refetch} category="MOVIES" suggestion={suggestion} />
+						<ItemCard
+							key={`${suggestion.id}-${suggestion.name}-${index}`}
+							onMatch={refetch}
+							category="MOVIES"
+							suggestion={suggestion}
+						/>
 					))}
 				</div>
 			) : (

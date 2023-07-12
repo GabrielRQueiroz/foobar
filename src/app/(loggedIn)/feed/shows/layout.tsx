@@ -13,7 +13,7 @@ export default function FeedLayout({ userFeed, onBoard }: { userFeed: ReactNode;
 		queryKey: ['preferences', 'shows', user?.user_id],
 		queryFn: () => getFeed(user?.user_id, 'SHOWS'),
 		onError: () => {
-			typeof window !== 'undefined' && localStorage.removeItem('user')
+			localStorage.removeItem('user')
 			router.replace('/login')
 		}
 	})

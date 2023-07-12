@@ -21,7 +21,7 @@ export const UserContext = createContext({} as UserContextTypes)
 
 export const UserContextProvider = ({ children }: { children: ReactNode }) => {
 	const [user, setUser] = useState<UserContextTypes['user']>(
-		JSON.parse(localStorage.getItem('user') || 'false') || null
+		typeof window !== 'undefined' && JSON.parse(localStorage.getItem('user') || 'false') || null
 	)
 	const [isAdmin, setIsAdmin] = useState<boolean>(false)
 	const router = useRouter()

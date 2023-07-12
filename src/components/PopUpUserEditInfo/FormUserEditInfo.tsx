@@ -40,7 +40,7 @@ const sendUserUpdate = async (fields: FieldsType, userId: number | undefined, us
 					}
 				}
 			)
-			.then(() => typeof window !== 'undefined' && localStorage.setItem('user', JSON.stringify(userData)))
+			.then(() => localStorage.setItem('user', JSON.stringify(userData)))
 		toast.success('Suas credenciais foram atualizadas')
 		return
 	}
