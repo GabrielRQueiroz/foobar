@@ -1,5 +1,5 @@
 import React from 'react'
-import Usercard from './UserCard'
+import {UserCard} from './UserCard'
 
 describe('Usercard Component', () => {
 	const user = {
@@ -9,7 +9,7 @@ describe('Usercard Component', () => {
 	}
 
 	it('renders the user card correctly', () => {
-		cy.mount(<Usercard {...user} />)
+		cy.mount(<UserCard {...user} />)
 
 		// Assertion: Verify that the user information is rendered correctly
 		cy.contains(`Olá, ${user.nome}!`).should('exist')

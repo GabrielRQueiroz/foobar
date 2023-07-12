@@ -2,7 +2,7 @@ type FriendsListTypes = {
 	listOfFriends: any[]
 }
 
-const FriendsList = ({ listOfFriends }: FriendsListTypes) => {
+export const FriendsList = ({ listOfFriends }: FriendsListTypes) => {
 	return (
 		<>
 			<div className="flex flex-1 flex-col text-base-content">
@@ -23,4 +23,4 @@ const FriendsList = ({ listOfFriends }: FriendsListTypes) => {
 		</>
 	)
 }
-export default FriendsList
+

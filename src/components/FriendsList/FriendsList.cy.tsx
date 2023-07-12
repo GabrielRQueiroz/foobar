@@ -1,5 +1,5 @@
 import React from 'react'
-import FriendsList from './FriendsList'
+import {FriendsList} from './FriendsList'
 
 describe('FriendsList Component', () => {
 	const friends = {

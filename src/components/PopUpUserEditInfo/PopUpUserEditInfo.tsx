@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { FormUserEditInfo } from './FormUserEditInfo'
 
 // declare global {
@@ -7,7 +7,7 @@ import { FormUserEditInfo } from './FormUserEditInfo'
 // 	}
 // }
 
-const PopUpUserEditInfo = () => {
+export const PopUpUserEditInfo = () => {
 	const openModal = (id: string) => {
 		const modal = document.getElementById(id) as HTMLDialogElement
 		modal.showModal()
@@ -30,4 +30,3 @@ const PopUpUserEditInfo = () => {
 	)
 }
 
-export default PopUpUserEditInfo

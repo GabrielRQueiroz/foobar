@@ -10,7 +10,7 @@ type PreferencesCardTypes = {
     preferences : Array<PreferencesTypes>;
 }
 
-const PreferencesCard = ({ preferences }: PreferencesCardTypes) => {
+export const PreferencesCard = ({ preferences }: PreferencesCardTypes) => {
 	return (
 		<>
 			<div className="card w-full card-compact card-bordered bg-base-100 text-base-content">
@@ -33,4 +33,3 @@ const PreferencesCard = ({ preferences }: PreferencesCardTypes) => {
 		</>
 	)
 }
-export default PreferencesCard

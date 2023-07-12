@@ -1,5 +1,4 @@
-import React from 'react'
-import PreferencesCard from './PreferencesCard'
+import { PreferencesCard } from './PreferencesCard';
 
 describe('PreferencesCard Component', () => {
 	const preferences = [
@@ -42,7 +41,7 @@ describe('PreferencesCard Component', () => {
 			.and('have.class', 'normal-case')
 	})
 
-  it('renders the preferences cards correctly', () => {
+	it('renders the preferences cards correctly', () => {
 		cy.mount(<PreferencesCard preferences={preferences} />)
 
 		// Assertion: Verify that the heading is rendered correctly

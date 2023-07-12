@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import PopUpUserEditInfo from '../PopUpUserEditInfo/PopUpUserEditInfo'
+import { PopUpUserEditInfo } from '../PopUpUserEditInfo/PopUpUserEditInfo'
 
 type UserInformation = {
 	nome: string
@@ -8,7 +8,7 @@ type UserInformation = {
 	numeroMatches: number
 }
 
-const Usercard = ({ nome, email, numeroMatches }: UserInformation) => {
+export const UserCard = ({ nome, email, numeroMatches }: UserInformation) => {
 	return (
 		<>
 			<div className="card card-compact bg-base-100 text-base-content card-bordered mb-4">
@@ -36,4 +36,3 @@ const Usercard = ({ nome, email, numeroMatches }: UserInformation) => {
 		</>
 	)
 }
-export default Usercard
