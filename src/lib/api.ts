@@ -211,12 +211,20 @@ export const getAllShows = async (auth_token: string | undefined) => {
 	return showsData
 }
 
-export const getUserData = async (user_id: User["user_id"]) => {
-	const {data: userData, status} = await axios.get(`${apiEndpoints.GET_USER_DATA}/${user_id}`)
+export const getUserData = async (user_id: User['user_id'] | undefined) => {
+	if (!user_id) return
+	const { data: allUsersData } = await axios.get(`${apiEndpoints.GET_USER_DATA}/preference`)
 
-	if (status !== 200) {
-		localStorage.removeItem("user")
-	}
-	
+	const userData = allUsersData.filter((user: any) => user.user_id === user_id)
+
 	return userData
+}
+
+export const getSimilarUsers = async (user_id: User['user_id'] | undefined) => {
+	if (!user_id) return
+	const { data: allUsersData } = await axios.get(`${apiEndpoints.GET_SIMILAR_USERS}/${user_id}`)
+
+	const orderedData: any[] = allUsersData.users.sort((a: any, b: any) => b.match - a.match)
+	
+	return orderedData
 }

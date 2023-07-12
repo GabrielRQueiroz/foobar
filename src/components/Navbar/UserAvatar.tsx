@@ -7,10 +7,10 @@ export const UserAvatar = () => {
 	const { user, logout } = useAuth()
 
 	return (
-		<ul className="dropdown-content outline outline-1 outline-base-200 menu rounded-box menu-sm mt-3 w-52 bg-base-100 p-2 shadow">
+		<ul className="dropdown-content menu rounded-box menu-sm mt-3 w-52 bg-base-100 p-2 shadow outline outline-1 outline-base-200">
 			<li>
 				{user ? (
-					<Link href={`/user/${user.user_name}`} className="justify-between">
+					<Link href={`/user/${user.user_id}`} className="justify-between">
 						Perfil
 					</Link>
 				) : (

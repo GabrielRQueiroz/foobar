@@ -1,25 +1,27 @@
-import { Hydrate } from '@/utils/hydrateClient';
-import { LayoutUser } from './LayoutUser'
-import { dehydrate } from '@tanstack/react-query';
+import { getSimilarUsers, getUserData } from '@/lib/api';
 import { getQueryClient } from '@/utils/getQueryClient';
-import { getUserData } from '@/lib/api';
+import { Hydrate } from '@/utils/hydrateClient';
+import { dehydrate } from '@tanstack/react-query';
+import { LayoutUser } from './LayoutUser';
 
-const UserPage = async ({ params }: { params: { slug: string } }) => {
+const UserPage = async ({ params }: { params: { user: string } }) => {
 	const queryClient = getQueryClient();
 	await queryClient.prefetchQuery({
-		queryKey: ['user', params.slug],
-		queryFn: () => getUserData(parseInt(params.slug))
+		queryKey: ['user', params.user],
+		queryFn: () => getUserData(parseInt(params.user))
+	});
+	await queryClient.prefetchQuery({
+		queryKey: ['user', params.user],
+		queryFn: () => getSimilarUsers(parseInt(params.user))
 	});
 	const dehydratedState = dehydrate(queryClient);
 
 	return (
 		<>
 			<Hydrate state={dehydratedState}>
-			<div className="flex h-screen w-full border-8 bg-base-100 p-8 text-base-content">
-				<LayoutUser />
-				<div className=" phone-1 artboard artboard-horizontal text-base-content">teste</div>
-				{/* <Image src="/background-LandingPage.jpg" width={400} height={0} alt="background" /> */}
-			</div>
+				<main className="w-full bg-base-100 p-2 sm:p-4 md:p-8">
+					<LayoutUser userId={params.user} />
+				</main>
 			</Hydrate>
 		</>
 	)

@@ -1,7 +1,7 @@
 import { ThemeSwitcher } from '@/components'
 import { QueryProviders } from '@/utils/queryProvider'
 //import axios from 'axios'
-import { MockWorker } from '@/utils/mockWorker'
+// import { MockWorker } from '@/utils/mockWorker'
 import { Inter } from 'next/font/google'
 import { ReactNode } from 'react'
 import { Toaster } from 'react-hot-toast'
@@ -18,7 +18,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
 	return (
 		<html lang="pt-BR">
-			<MockWorker>
+			{/* <MockWorker> */}
 				<body className={inter.className}>
 					<UserContextProvider>
 						<QueryProviders>
@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 						<Toaster />
 					</UserContextProvider>
 				</body>
-			</MockWorker>
+			{/* </MockWorker> */}
 		</html>
 	)
 }

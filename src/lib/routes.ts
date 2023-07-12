@@ -92,7 +92,16 @@ const apiEndpoints = {
 
 	MUTATE_BOOKS_PREFERENCES: `${baseUrl}/user/connect_to_book`,
 	MUTATE_MOVIES_PREFERENCES: `${baseUrl}/user/connect_to_movie`,
-	MUTATE_SHOWS_PREFERENCES: `${baseUrl}/user/connect_to_show`
+	MUTATE_SHOWS_PREFERENCES: `${baseUrl}/user/connect_to_show`,
+
+	// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= USERS -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+	/**
+	 * Essa rota deve ser acrescida de /:id para buscar usuários semelhantes a um usuário específico
+	 * @example: `${GET_SIMILAR_USERS}/${user_id}`
+	 * @example: GET_SIMILAR_USERS + '/' + user_id
+	 */
+	GET_SIMILAR_USERS: `${baseUrl}/user/get_users_by_preferences`,
 } as const
 
 export { apiEndpoints }

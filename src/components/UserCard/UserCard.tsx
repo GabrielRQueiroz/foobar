@@ -11,24 +11,24 @@ type UserInformation = {
 const Usercard = ({ nome, email, numeroMatches }: UserInformation) => {
 	return (
 		<>
-			<div className="card w-full justify-start border-2 border-gray-100 bg-base-100 text-base-content drop-shadow-xl">
-				<div className="flex flex-row justify-between p-8">
-					<div className="flex w-10/12 flex-row gap-8">
-						<div className="w-auto">
-							<Image className="rounded-full" width={150} height={150} src="/user_profile.jpg" alt="user profile" />
+			<div className="card card-compact bg-base-100 text-base-content card-bordered mb-4">
+				<div className="card-body">
+					<div className="flex flex-row flex-wrap justify-between items-center gap-4">
+						<div className="flex-shrink h-24 mx-auto aspect-square relative">
+							<Image className="rounded-full" fill src="/user_profile.jpg" alt="user profile" />
 						</div>
-						<div className="flex flex-col justify-between py-4">
-							<div className="flex flex-col justify-center gap-2 ">
-								<p>Olá, {nome}!</p>
-								<p>{email}</p>
+						<div className="flex flex-grow flex-col justify-between gap-2">
+							<div className="flex flex-col w-full justify-center gap-2 overflow-ellipsis">
+								<p className="card-title">Olá, {nome}!</p>
+								<p className="text-base text-ellipsis whitespace-nowrap w-56 sm:w-full overflow-hidden">{email}</p>
 							</div>
 
-							<div className="bg-black-900 flex h-12 w-36 items-center justify-center rounded-lg bg-base-200">
-								<p className="text-black">{numeroMatches} matches</p>
+							<div className="badge badge-neutral badge-lg">
+								<p>{numeroMatches} matches</p>
 							</div>
 						</div>
 					</div>
-					<div className="flex w-2/12">
+					<div className="card-actions justify-end">
 						<PopUpUserEditInfo/>
 					</div>
 				</div>
