@@ -13,23 +13,18 @@ type PreferencesCardTypes = {
 const PreferencesCard = ({ preferences }: PreferencesCardTypes) => {
 	return (
 		<>
-			<div className="card h-full w-full justify-start overflow-auto border-2 border-gray-100 bg-base-100 drop-shadow-xl ">
-				<div className="flex flex-col gap-y-8 p-8">
-					<div className="flex flex-row justify-between">
-						<h1 className="text-xl">Minhas Preferências</h1>
-						<div className="flex w-2/12">
-							<button className="btn w-[10vw] rounded-lg text-[0.8vw] normal-case text-white bg-black">
-								<Link href="/registro">Editar preferências</Link>
-							</button>
-						</div>
+			<div className="card w-full card-compact card-bordered bg-base-100 text-base-content">
+				<div className="card-body">
+					<div className="flex flex-row flex-wrap gap-4 justify-between mb-4">
+						<h1 className="card-title lg:mx-0 mx-auto">Minhas Preferências</h1>
+						<button className="btn lg:mx-0 mx-auto normal-case btn-neutral">
+							<Link href="/registro">Editar preferências</Link>
+						</button>
 					</div>
-					<div className="flex h-fit justify-center">
-						<div className="flex h-fit w-[90%] flex-row flex-wrap justify-start gap-y-8 ">
+					<div className="flex h-fit">
+						<div className="flex justify-center w-full flex-row flex-wrap gap-y-8 gap-x-4 ">
 							{preferences.map((value, index) => (
-								<div key={index} className="mx-2 justify-start ">
-									{/* trocar a linha abaixo pelo componente de preferencias */}
-									<div className="card h-32 w-32 justify-start border-2 border-gray-100 bg-base-100 drop-shadow-xl" />
-								</div>
+								<div key={`${value}-${index}`} className="card aspect-square flex-1 justify-start border-2 border-gray-100 bg-base-100 shadow basis-1/3 sm:basis-1/4 md:basis-1/6" />
 							))}
 						</div>
 					</div>

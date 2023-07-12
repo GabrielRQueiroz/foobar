@@ -1,7 +1,7 @@
 'use client'
 
 import { useAuth } from '@/hooks/useAuth'
-import { getFeed } from '@/lib/api'
+import { getFeed, getUserData } from '@/lib/api'
 import { useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { ReactNode } from 'react'
@@ -16,6 +16,10 @@ export default function FeedLayout({ userFeed, onBoard }: { userFeed: ReactNode;
 			localStorage.removeItem('user')
 			router.replace('/login')
 		}
+	})
+	const {data: userData} = useQuery({
+		queryKey: ['user', user?.user_id],
+		queryFn: () => getUserData(user?.user_id),
 	})
 
 	return (

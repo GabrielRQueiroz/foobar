@@ -8,53 +8,23 @@ import { FormUserEditInfo } from './FormUserEditInfo'
 // }
 
 const PopUpUserEditInfo = () => {
-	useEffect(() => {
-		const hideModal = () => {
-			const modal = (window as any).my_modal_3
-			if (modal) {
-				modal.close()
-			}
-		}
-
-		const modalButton = document.querySelector('.btn-ghost')
-		if (modalButton) {
-			modalButton.addEventListener('click', hideModal)
-		}
-
-		const modal = (window as any).my_modal_3
-		if (modal) {
-			modal.addEventListener('keydown', (event: any) => {
-				if (event.key === 'Escape') {
-					hideModal()
-				}
-			})
-		}
-
-		return () => {
-			if (modalButton) {
-				modalButton.removeEventListener('click', hideModal)
-			}
-
-			if (modal) {
-				modal.removeEventListener('keydown', hideModal)
-			}
-		}
-	}, [])
-
+	const openModal = (id: string) => {
+		const modal = document.getElementById(id) as HTMLDialogElement
+		modal.showModal()
+	}
+	
 	return (
 		<>
 			<button
-				className="btn w-[10vw] rounded-lg bg-black text-[0.9vw] normal-case text-white"
-				onClick={() => (window as any).my_modal_3?.showModal()}
+				className="btn btn-neutral normal-case"
+				onClick={() => openModal('user-info')}
 			>
 				Editar perfil
 			</button>
-			<dialog id="my_modal_3" className="modal">
-				<form className="modal-box">
-					<div className="flex w-full flex-col items-center">
-						<FormUserEditInfo/>
-                    </div>
-				</form>
+			<dialog id="user-info" className="modal">
+				<div className="modal-box">
+					<FormUserEditInfo/>
+				</div>
 			</dialog>
 		</>
 	)
