@@ -1,27 +1,34 @@
+import { ThemeSwitcher } from '@/components'
 import { QueryProviders } from '@/utils/queryProvider'
-import { Navbar, ThemeSwitcher } from '@/components'
 //import axios from 'axios'
+// import { MockWorker } from '@/utils/mockWorker'
 import { Inter } from 'next/font/google'
 import { ReactNode } from 'react'
+import { Toaster } from 'react-hot-toast'
+import { UserContextProvider } from '../contexts/UserContexts'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-	title: 'RE:Match',
+	title: 'Re:Match',
 	description: 'Descubra e compartilhe seus interesses o mundo!'
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
 	return (
 		<html lang="pt-BR">
-			<body className={inter.className}>
-				<QueryProviders>
-					<Navbar />
-					{children}
-				</QueryProviders>
-				<ThemeSwitcher />
-			</body>
+			{/* <MockWorker> */}
+				<body className={inter.className}>
+					<UserContextProvider>
+						<QueryProviders>
+							{children}
+						</QueryProviders>
+						<ThemeSwitcher />
+						<Toaster />
+					</UserContextProvider>
+				</body>
+			{/* </MockWorker> */}
 		</html>
 	)
 }

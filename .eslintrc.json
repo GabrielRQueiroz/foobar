@@ -9,12 +9,14 @@
 		"plugin:jsx-a11y/recommended",
 		"plugin:react-hooks/recommended",
 		"plugin:@tanstack/eslint-plugin-query/recommended",
-		"prettier"
+		"prettier",
+		"plugin:storybook/recommended"
 	],
 	"rules": {
 		"react/prop-types": "off",
 		"react/jsx-uses-react": "off",
 		"react/react-in-jsx-scope": "off",
+		"no-unused-vars": "warn",
 		"react/self-closing-comp": "warn"
 	},
 	"parserOptions": {

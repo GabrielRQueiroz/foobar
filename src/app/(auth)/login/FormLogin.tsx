@@ -1,15 +1,13 @@
 'use client'
-import React from 'react'
-import { Formik, Field, Form, ErrorMessage } from 'formik'
-import * as Yup from 'yup'
-import axios from 'axios'
+import { useAuth } from '@/hooks/useAuth'
 import { useMutation } from '@tanstack/react-query'
-import { useRouter } from 'next/navigation'
 import clsx from 'clsx'
+import { ErrorMessage, Field, Form, Formik } from 'formik'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
+import * as Yup from 'yup'
 
-const sendUserSignIn = async (fields: FieldsType) => {
-	return axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, fields)
-}
 
 type FieldsType = {
 	email: string
@@ -17,25 +15,31 @@ type FieldsType = {
 }
 
 export const FormLogin = () => {
+	const {user, sendUserSignIn} = useAuth()
 	const router = useRouter()
 	const { mutate, isError, isLoading, isSuccess } = useMutation({
 		mutationFn: sendUserSignIn,
 		onSuccess: () => {
-			router.push('/')
+			router.push('/feed/books')
 		}
 	})
+	
+	useEffect(() => {
+		user && router.push("/feed/books")
+	})
+
 	return (
 		<div className="m-auto flex items-center justify-center">
 			<Formik
-				initialValues={{
-					email: '',
-					password: ''
-				} as FieldsType}
+				initialValues={
+					{
+						email: '',
+						password: ''
+					} as FieldsType
+				}
 				validationSchema={Yup.object().shape({
 					email: Yup.string().email('Email é invalido').required('Email é necessário'),
-					password: Yup.string()
-						.min(6, 'Sua senha precisa ter no minimo 6 caracteres')
-						.required('É necessário uma senha')
+					password: Yup.string().required('É necessário uma senha')
 				})}
 				onSubmit={fields => {
 					mutate(fields)
@@ -47,48 +51,50 @@ export const FormLogin = () => {
 							<p className="bold text-xl">Entrar no App</p>
 							<br />
 							<span>ou </span>
-							<a className="text-[#4F75FF] underline" href="/registro">
+							<Link className="text-[#4F75FF] underline" href="/registro">
 								criar uma conta
-							</a>
+							</Link>
 						</div>
 						{isError && (
 							<div>
-								<p className="ml-2 text-error">E-mail ou senha incorretos.</p>
+								<p data-cy="failed-login" className="ml-2 text-error">E-mail ou senha incorretos.</p>
 							</div>
 						)}
-						<div className="p-2">
+						<div data-cy="email" className="p-2">
 							<Field
-								disabled={(isLoading || isSuccess)}
+								disabled={isLoading || isSuccess}
 								placeholder="Email"
 								name="email"
 								type="text"
-								className={
-									clsx('placeholder-black-600 form-control w-full rounded-lg border-2 input-primary bg-transparent p-2',
-									(errors.email && touched.email ? 'is-invalid' : ''),
-									(isLoading || isSuccess) && "input-disabled")
-								}
+								className={clsx(
+									'placeholder-black-600 form-control input-primary w-full rounded-lg border-2 bg-transparent p-2',
+									errors.email && touched.email ? 'is-invalid' : '',
+									(isLoading || isSuccess) && 'input-disabled'
+								)}
 							/>
 							<ErrorMessage name="email" component="div" className="invalid-feedback text-sm text-error" />
 						</div>
-						<div className="p-2">
+						<div data-cy="password" className="p-2">
 							<Field
-								disabled={(isLoading || isSuccess)}
+								disabled={isLoading || isSuccess}
 								placeholder="Senha"
 								name="password"
 								type="password"
-								className={
-									clsx('placeholder-black-600 form-control w-full rounded-lg border-2 input-primary bg-transparent p-2',
-									(errors.password && touched.password ? 'is-invalid' : ''),
-									(isLoading || isSuccess) && "input-disabled")
-								}
+								className={clsx(
+									'placeholder-black-600 form-control input-primary w-full rounded-lg border-2 bg-transparent p-2',
+									errors.password && touched.password ? 'is-invalid' : '',
+									(isLoading || isSuccess) && 'input-disabled'
+								)}
 							/>
 							<ErrorMessage name="password" component="div" className="invalid-feedback text-sm text-error" />
 						</div>
-						<div className="p-2">
-							<button type="submit" disabled={(isLoading || isSuccess)} className="btn-primary btn mr-2 w-full text-primary-content">
-								{(isLoading || isSuccess) ? (
-									<span className="loading loading-spinner loading-md" />
-								) :"Entrar"}
+						<div data-cy="submit" className="p-2">
+							<button
+								type="submit"
+								disabled={isLoading || isSuccess || !!user}
+								className="btn-primary btn mr-2 w-full text-primary-content"
+							>
+								{isLoading || isSuccess ? <span className="loading loading-spinner loading-md" /> : 'Entrar'}
 							</button>
 						</div>
 					</Form>

@@ -1,15 +1,13 @@
 'use client'
-import React from 'react'
-import { Formik, Field, Form, ErrorMessage } from 'formik'
-import * as Yup from 'yup'
+import { useAuth } from '@/hooks/useAuth'
 import { useMutation } from '@tanstack/react-query'
-import { useRouter } from 'next/navigation'
+import { AxiosError } from 'axios'
 import clsx from 'clsx'
-import axios, { AxiosError } from 'axios'
-
-const sendUserSignUp = async (fields: Omit<FieldsType, "confirmPassword">) => {
-	return axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user`, fields)
-}
+import { ErrorMessage, Field, Form, Formik } from 'formik'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
+import * as Yup from 'yup'
 
 type FieldsType = {
 	name: string
@@ -19,13 +17,19 @@ type FieldsType = {
 }
 
 export const FormRegistro = () => {
+	const { user, sendUserSignUp } = useAuth()
 	const router = useRouter()
 	const { mutate, isError, isLoading, isSuccess, error } = useMutation({
 		mutationFn: sendUserSignUp,
 		onSuccess: () => {
-			router.push('/login')
+			router.push('/feed/books')
 		}
 	})
+
+	useEffect(() => {
+		user && router.push("/feed/books")
+	})
+	
 	return (
 		<div className="m-auto flex items-center justify-center">
 			<Formik
@@ -59,9 +63,9 @@ export const FormRegistro = () => {
 							<p className="bold text-xl">Criar Conta</p>
 							<br />
 							<span>ou </span>
-							<a className="text-[#4F75FF] underline" href="/login">
+							<Link className="text-[#4F75FF] underline" href="/login">
 								ja tenho uma conta
-							</a>
+							</Link>
 						</div>
 						{isError && (
 							<div>
@@ -139,7 +143,7 @@ export const FormRegistro = () => {
 							<button
 								data-cy="submit"
 								type="submit"
-								disabled={isLoading || isSuccess}
+								disabled={isLoading || isSuccess || !!user}
 								className="btn-primary btn mr-2 w-full text-primary-content"
 							>
 								{isLoading || isSuccess ? <span className="loading loading-spinner loading-md" /> : 'Cadastrar'}
