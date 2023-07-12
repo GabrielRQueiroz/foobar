@@ -70,7 +70,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
 	const sendUserSignIn = async (fields: { email: string; password: string }) => {
 		return axios.post(apiEndpoints.POST_USER_LOGIN, fields).then(res => {
 			setUser(res.data)
-			localStorage.setItem('user', JSON.stringify(res.data))
+			typeof window !== 'undefined' && localStorage.setItem('user', JSON.stringify(res.data))
 		})
 	}
 
@@ -80,7 +80,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
 
 			axios.post(apiEndpoints.POST_USER_LOGIN, fields).then(res => {
 				setUser(res.data)
-				localStorage.setItem('user', JSON.stringify(res.data))
+				typeof window !== 'undefined' && localStorage.setItem('user', JSON.stringify(res.data))
 			})
 		})
 	}

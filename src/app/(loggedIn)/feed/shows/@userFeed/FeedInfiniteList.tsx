@@ -14,7 +14,7 @@ export const FeedInfiniteList = () => {
 		queryFn: () => getFeed(user?.user_id, 'SHOWS'),
 		enabled: !!user?.user_id,
 		onError: () => {
-			localStorage.removeItem('user')
+			typeof window !== 'undefined' && localStorage.removeItem('user')
 			router.replace('/login')
 		}
 	})

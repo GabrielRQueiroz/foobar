@@ -19,10 +19,10 @@ export const ThemeSwitcher = () => {
 
 	const handleThemeChange = (event: ChangeEvent<HTMLInputElement>) => {
 		if (event.target.checked) {
-			localStorage.setItem('theme', 'fantasy')
+			typeof window !== 'undefined' && localStorage.setItem('theme', 'fantasy')
 			document.querySelector('html')?.setAttribute('data-theme', 'fantasy')
 		} else {
-			localStorage.setItem('theme', 'dark')
+			typeof window !== 'undefined' && localStorage.setItem('theme', 'dark')
 			document.querySelector('html')?.setAttribute('data-theme', 'dark')
 		}
 	}
