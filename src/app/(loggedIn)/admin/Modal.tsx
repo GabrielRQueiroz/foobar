@@ -25,17 +25,17 @@ export const Modal = ({ category, onSubmit }: { category: 'Livros' | 'Filmes' | 
 	const { mutate } = useMutation({
 		mutationFn: (fields: any) => createItem(user?.auth_token, fields, category),
 		onSuccess: () => {
-			closeModal('create')
-            onSubmit()
-            toast.success('CADASTRADO!')
+			closeModal(`create-${category}`)
+			onSubmit()
+			toast.success('CADASTRADO!')
 		}
 	})
 	return (
 		<>
-			<button className="btn" onClick={() => openModal('create')}>
+			<button className="btn" onClick={() => openModal(`create-${category}`)}>
 				Cadastrar {category}
 			</button>
-			<dialog id="create" className="modal modal-bottom sm:modal-middle">
+			<dialog id={`create-${category}`} className="modal modal-bottom sm:modal-middle">
 				<Formik
 					initialValues={
 						{
@@ -104,7 +104,7 @@ export const Modal = ({ category, onSubmit }: { category: 'Livros' | 'Filmes' | 
 								<button type="submit" className="btn-primary btn mr-2 flex flex-grow text-primary-content">
 									Cadastrar
 								</button>
-								<button type="button" className="btn" onClick={() => closeModal('create')}>
+								<button type="button" className="btn" onClick={() => closeModal(`create-${category}`)}>
 									Cancelar
 								</button>
 							</div>
