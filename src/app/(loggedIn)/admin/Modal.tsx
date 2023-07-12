@@ -42,7 +42,7 @@ export const Modal = ({ category, onSubmit }: { category: 'Livros' | 'Filmes' | 
 							name: '',
 							author: '',
 							year: 2000,
-							tag_name: ''
+							tag_name: 'Suspense'
 						} as FieldsType
 					}
 					validationSchema={Yup.object().shape({
