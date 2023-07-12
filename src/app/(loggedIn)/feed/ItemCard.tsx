@@ -1,20 +1,28 @@
 'use client'
 
 import { useAuth } from '@/hooks/useAuth'
-import { updateBookPreferences } from '@/lib/api'
+import { updatePrefence } from '@/lib/api'
 import { ThumbsUp } from '@phosphor-icons/react'
 import { useMutation } from '@tanstack/react-query'
 import Image from 'next/image'
 
-export const ItemCard = ({ suggestion, onMatch }: { suggestion: any; onMatch: () => void }) => {
+export const ItemCard = ({
+	suggestion,
+	onMatch,
+	category
+}: {
+	suggestion: any
+	onMatch: () => void
+	category: 'BOOKS' | 'MOVIES' | 'SHOWS'
+}) => {
 	const { user } = useAuth()
 	const { mutate } = useMutation({
 		mutationKey: ['preference_update', 'books'],
-		mutationFn: updateBookPreferences
+		mutationFn: (fields: any) => updatePrefence(fields, category)
 	})
 
 	return (
-		<div data-cy="feed-card" className="card card-compact max-w-xs text-base-content shadow">
+		<div data-cy="feed-card" className="card-compact card w-full max-w-xs text-base-content shadow">
 			<figure className="pointer-events-none relative aspect-square w-full">
 				<Image
 					data-cy="feed-card-image"

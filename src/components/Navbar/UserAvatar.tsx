@@ -7,7 +7,7 @@ export const UserAvatar = () => {
 	const { user, logout } = useAuth()
 
 	return (
-		<ul className="dropdown-content menu rounded-box menu-sm mt-3 w-52 bg-base-100 p-2 shadow">
+		<ul className="dropdown-content outline outline-1 outline-base-200 menu rounded-box menu-sm mt-3 w-52 bg-base-100 p-2 shadow">
 			<li>
 				{user ? (
 					<Link href={`/user/${user.user_name}`} className="justify-between">
@@ -18,7 +18,7 @@ export const UserAvatar = () => {
 				)}
 			</li>
 			<li>
-				<button disabled={!user} type="button" onClick={logout}>
+				<button disabled={!user} type="button" className="text-error" onClick={logout}>
 					{!user ? <div className="loading loading-spinner mx-auto" /> : 'Desconectar'}
 				</button>
 			</li>

@@ -18,7 +18,7 @@ type UserContextTypes = {
 export const UserContext = createContext({} as UserContextTypes)
 
 export const UserContextProvider = ({ children }: { children: ReactNode }) => {
-	const [user, setUser] = useState<UserContextTypes['user']>(JSON.parse(localStorage.getItem('user') || ''))
+	const [user, setUser] = useState<UserContextTypes['user']>(JSON.parse(localStorage.getItem('user') || 'false') || null)
 	const router = useRouter()
 	const pathname = usePathname()
 

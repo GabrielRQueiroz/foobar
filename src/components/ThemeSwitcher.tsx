@@ -30,7 +30,7 @@ export const ThemeSwitcher = () => {
 	return (
 		<label
 			data-cy="theme-switcher"
-			className="swap-rotate btn-ghost btn-circle btn bottom-8 right-8 hidden text-base-content ip3:swap ip3:fixed"
+			className="swap-rotate btn-base-300 btn-circle btn top-2 left-8 z-[55] bottom-auto right-auto sm:left-auto sm:top-auto sm:bottom-8 sm:right-8 hidden text-base-content ip3:swap ip3:fixed"
 		>
 			<input id="theme-switcher" type="checkbox" onChange={handleThemeChange} />
 			<Sun data-cy="light-theme" className="swap-off fill-current" size={32} />

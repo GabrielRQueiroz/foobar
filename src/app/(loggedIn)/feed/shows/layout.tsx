@@ -10,8 +10,8 @@ export default function FeedLayout({ userFeed, onBoard }: { userFeed: ReactNode;
 	const { user } = useAuth()
 	const router = useRouter()
 	const { data: preferences } = useQuery({
-		queryKey: ['preferences', 'books', user?.user_id],
-		queryFn: () => getFeed(user?.user_id, 'BOOKS'),
+		queryKey: ['preferences', 'shows', user?.user_id],
+		queryFn: () => getFeed(user?.user_id, 'SHOWS'),
 		onError: () => {
 			localStorage.removeItem('user')
 			router.replace('/login')
