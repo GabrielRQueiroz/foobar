@@ -10,8 +10,8 @@ export const FeedInfiniteList = () => {
 	const { user } = useAuth()
 	const router = useRouter()
 	const { data: feedData, refetch } = useQuery({
-		queryKey: ['feed', 'books', user?.user_id],
-		queryFn: () => getFeed(user?.user_id, 'BOOKS'),
+		queryKey: ['feed', 'shows', user?.user_id],
+		queryFn: () => getFeed(user?.user_id, 'SHOWS'),
 		enabled: !!user?.user_id,
 		onError: () => {
 			localStorage.removeItem('user')
@@ -24,7 +24,7 @@ export const FeedInfiniteList = () => {
 			{feedData ? (
 				<div className="grid max-w-7xl grid-cols-1 ip3:grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 xl:gap-x-8 w-full">
 					{feedData.map((suggestion: any, index: number) => (
-						<ItemCard key={`${suggestion.id}-${suggestion.name}-${index}`} onMatch={refetch} category="BOOKS" suggestion={suggestion} />
+						<ItemCard key={`${suggestion.id}-${suggestion.name}-${index}`} onMatch={refetch} category="SHOWS" suggestion={suggestion} />
 					))}
 				</div>
 			) : (

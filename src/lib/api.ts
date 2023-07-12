@@ -4,84 +4,87 @@ import toast from 'react-hot-toast'
 import { apiEndpoints } from './routes'
 import { Book, Movie, Show, User } from './types'
 
-export const updateBookPreferences = async (fields: {
+export const updatePrefence = async (fields: {
 	userId: User['user_id'] | undefined
-	preferenceId: Book['id']
-}) => {
+	preferenceId: Book['id'] | Movie['id'] | Show['id']
+	},
+	category: "BOOKS" | "MOVIES" | "SHOWS"
+) => {
 	if (!fields.userId) return
-	const response = await axios.post(apiEndpoints.MUTATE_BOOKS_PREFERENCES, {
-		book_id: `${fields.preferenceId}`,
-		user_id: `${fields.userId}`
-	})
 
+	let url;
+
+	switch (category) {
+		case "BOOKS":
+			url = apiEndpoints.MUTATE_BOOKS_PREFERENCES
+			break
+		case "MOVIES":
+			url = apiEndpoints.MUTATE_MOVIES_PREFERENCES
+			break
+		case "SHOWS":
+			url = apiEndpoints.MUTATE_SHOWS_PREFERENCES
+			break
+		default:
+			url = apiEndpoints.MUTATE_BOOKS_PREFERENCES
+			break
+	}
+
+	const response = await axios.post(url, 
+		category === "BOOKS" &&
+			{
+				book_id: `${fields.preferenceId}`,
+				user_id: `${fields.userId}`
+			}
+		||
+		category === "MOVIES" &&
+			{
+				movie_id: `${fields.preferenceId}`,
+				user_id: `${fields.userId}`
+			}
+		||
+		category === "SHOWS" &&
+			{
+				show_id: `${fields.preferenceId}`,
+				user_id: `${fields.userId}`
+			}
+	)
+	
 	toast.success('MATCH!')
 
 	return response.data
 }
 
-export const updateMoviePreferences = async (fields: {
-	userId: User['user_id'] | undefined
-	preferenceId: Movie['id']
-}) => {
-	if (!fields.userId) return
-	const response = await axios.post(apiEndpoints.MUTATE_MOVIES_PREFERENCES, {
-		movie_id: `${fields.preferenceId}`,
-		user_id: `${fields.userId}`
-	})
-
-	toast.success('MATCH!')
-
-	return response.data
-}
-
-export const updateShowPreferences = async (fields: {
-	userId: User['user_id'] | undefined
-	preferenceId: Show['id']
-}) => {
-	if (!fields.userId) return
-	const response = await axios.post(apiEndpoints.MUTATE_SHOWS_PREFERENCES, {
-		show_id: `${fields.preferenceId}`,
-		user_id: `${fields.userId}`
-	})
-
-	toast.success('MATCH!')
-
-	return response.data
-}
-
-export const getBookFeed = async (user_id: number | undefined) => {
+export const getFeed = async (user_id: number|undefined, category: "BOOKS"|"MOVIES"|"SHOWS") => {
 	if (!user_id) return
-	const { data: feedData } = await axios.get(apiEndpoints.GET_BOOKS_PREFERENCES, {
+	
+	let url
+
+	switch (category) {
+		case "BOOKS":
+			url = apiEndpoints.GET_BOOKS_PREFERENCES
+			break
+		case "MOVIES":
+			url = apiEndpoints.GET_MOVIES_PREFERENCES
+			break
+		case "SHOWS":
+			url = apiEndpoints.GET_SHOWS_PREFERENCES
+			break
+		default:
+			url = apiEndpoints.GET_BOOKS_PREFERENCES
+			break
+	}
+
+	const feedData = await axios.get(url, {
 		params: {
 			user_id: `${user_id}`
 		}
-	})
+	}).then((res)=> res.data)
 
-	const orderedData = feedData.books.sort((a: any, b: any) => b.match - a.match)
+	if (feedData.length <= 1) {
+		return feedData
+	}
 
-	return orderedData
-}
-
-export const getMovieFeed = async (user_id: number | undefined) => {
-	const { data: feedData } = await axios.get(apiEndpoints.GET_MOVIES_PREFERENCES, {
-		params: {
-			user_id: `${user_id}`
-		}
-	})
-
-	const orderedData = feedData.books.sort((a: any, b: any) => b.match - a.match)
-
-	return orderedData
-}
-
-export const getShowFeed = async (user_id: number | undefined) => {
-	const { data: feedData } = await axios.get(apiEndpoints.GET_SHOWS_PREFERENCES, {
-		params: {
-			user_id: `${user_id}`
-		}
-	})
-
-	const orderedData = feedData.books.sort((a: any, b: any) => b.match - a.match)
+	const orderedData = feedData[category.toLowerCase()].sort((a: any, b: any) => b.match - a.match)
 
 	return orderedData
 }

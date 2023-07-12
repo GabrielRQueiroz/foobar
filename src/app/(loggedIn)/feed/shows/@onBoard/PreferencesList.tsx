@@ -11,15 +11,15 @@ import toast from 'react-hot-toast'
 export const PreferencesList = () => {
 	const { user } = useAuth()
 	const { data: preferences, isLoading } = useQuery({
-		queryKey: ['onboarding', 'books', user?.user_id],
-		queryFn: () => getFeed(user?.user_id, 'BOOKS'),
+		queryKey: ['onboarding', 'shows', user?.user_id],
+		queryFn: () => getFeed(user?.user_id, 'SHOWS'),
 	})
 	const {
 		mutate,
 		isLoading: mutationIsLoading,
 		isSuccess: mutationIsSuccess,
 		isError: mutationIsError
-	} = useMutation({ mutationKey: ['preference_update', 'books'], mutationFn: (fields: any) => updatePrefence(fields, "BOOKS") })
+	} = useMutation({ mutationKey: ['preference_update', 'shows'], mutationFn: (fields: any) => updatePrefence(fields, "SHOWS") })
 	const [selectedPreferences, setSelectedPreferences] = useState<number[]>([])
 
 	const handlePreferenceSelection = async (preferenceId: number) => {

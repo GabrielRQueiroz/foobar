@@ -7,8 +7,8 @@ import { FeedInfiniteList } from "./FeedInfiniteList";
 export default async function Feed() {
 	const queryClient = getQueryClient();
 	await queryClient.prefetchQuery({
-		queryKey: ['feed', 'books'],
-		queryFn: (userId: any) => getFeed(userId, "BOOKS")
+		queryKey: ['feed', 'shows'],
+		queryFn: (userId: any) => getFeed(userId, "SHOWS")
 	})
 	const dehydratedState = dehydrate(queryClient);
 
