@@ -17,10 +17,6 @@ export default function FeedLayout({ userFeed, onBoard }: { userFeed: ReactNode;
 			router.replace('/login')
 		}
 	})
-	const {data: userData} = useQuery({
-		queryKey: ['user', user?.user_id],
-		queryFn: () => getUserData(user?.user_id),
-	})
 
 	return (
 		<>
