@@ -40,9 +40,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
 			}
 
 			toast.error('Sua sessão expirou, faça login novamente.')
-		}
-
-		if (!['/login', '/registro', '/'].includes(pathname)) {
+		} else if (!['/login', '/registro', '/'].includes(pathname) && !user) {
 			router.push('/login')
 		}
 	}, [router])

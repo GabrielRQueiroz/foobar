@@ -4,8 +4,8 @@ import { UserAvatar } from './UserAvatar'
 
 export const Navbar = () => {
 	return (
-		<>
-			<nav className="navbar max-w-7xl mx-auto sticky top-0 z-50 bg-base-100 text-base-content">
+		<nav className="w-full bg-base-100">
+			<div className="navbar max-w-7xl mx-auto sticky top-0 z-50 text-base-content">
 				<div className="navbar-start">
 					<Link href="/feed/books" className="btn-ghost hidden text-xl normal-case sm:btn">
 						Re:Match
@@ -60,7 +60,7 @@ export const Navbar = () => {
 						</ul>
 					</div>
 				</div>
-			</nav>
-		</>
+			</div>
+		</nav>
 	)
 }

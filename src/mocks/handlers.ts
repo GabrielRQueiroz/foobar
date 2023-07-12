@@ -1,11 +1,11 @@
-import { rest } from 'msw'
-import { apiEndpoints } from '../lib/routes'
-import { preferencesData } from './constants/preferences'
+// import { rest } from 'msw'
+// import { apiEndpoints } from '../lib/routes'
+// import { preferencesData } from './constants/preferences'
 
 export const handlers = [
 	// rest.get(apiEndpoints.GET_BOOKS_PREFERENCES, (req, res, ctx) => {
 	// 	// const limit = Number(req.url.searchParams.get('limit'))
-		
+
 	// 	return res(ctx.status(200), ctx.json({
 	// 		books: [
 	// 			...preferencesData.books,
