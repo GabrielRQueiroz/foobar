@@ -18,7 +18,7 @@
 import './commands'
 
 Cypress.on('test:before:run:async', async () => {
-	localStorage.removeItem('user')
+	typeof window !== 'undefined' && localStorage.removeItem("user")
 
 	// await worker.start()
 })
