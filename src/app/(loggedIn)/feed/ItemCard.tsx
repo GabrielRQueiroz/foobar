@@ -22,12 +22,19 @@ export const ItemCard = ({
 	})
 
 	return (
-		<div data-cy="feed-card" className="card-compact card w-full max-w-xs text-base-content shadow">
-			<figure className="pointer-events-none relative aspect-square w-full">
+		<div data-cy="feed-card" className="card-compact card relative w-full max-w-xs text-base-content shadow">
+			{Math.fround(suggestion.match) > 0.75 && (
+				<div className="tooltip tooltip-left absolute right-4 top-4 z-40 text-2xl" data-tip="Bom match!">
+					<p className="pointer-events-none">🔥</p>
+					<p className="-z-10 pointer-events-none absolute opacity-80 top-0 right-0 animate-[ping_1.5s_ease-out_infinite]">🔥</p>
+				</div>
+			)}
+			<figure className="pointer-events-none relative aspect-square w-full overflow-hidden rounded-xl">
 				<Image
 					data-cy="feed-card-image"
 					fill
 					alt={suggestion.name}
+					sizes={'200px'}
 					src={`https://picsum.photos/seed/${suggestion.id}/200`}
 				/>
 			</figure>

@@ -72,7 +72,7 @@ export const PreferencesList = () => {
 									e.preventDefault()
 									handlePreferenceSelection(preference.id)
 								}}
-								className="indicator aspect-square flex-1 basis-1/4 md:basis-1/5"
+								className="indicator aspect-square flex-1 basis-1/4 md:basis-1/5 max-w-xs"
 								key={`${preference.id + index}-${index}`}
 							>
 								<span
