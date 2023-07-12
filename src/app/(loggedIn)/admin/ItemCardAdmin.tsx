@@ -1,20 +1,28 @@
 'use client'
 
 import { useAuth } from '@/hooks/useAuth'
-import { deleteBook } from '@/lib/api'
+import { deleteItem } from '@/lib/api'
 import { Trash } from '@phosphor-icons/react'
 import { useMutation } from '@tanstack/react-query'
 import Image from 'next/image'
 
-export const ItemCardAdmin = ({ nameBooks, onDelete }: { nameBooks: any; onDelete: () => void }) => {
+export const ItemCardAdmin = ({
+	nameBooks,
+	onDelete,
+	category
+}: {
+	nameBooks: any
+	onDelete: () => void
+	category: 'Livros' | 'Filmes' | 'Series'
+}) => {
 	const { user } = useAuth()
 	const { mutate } = useMutation({
-		mutationKey: ['preference_update', 'books'],
-		mutationFn: deleteBook
+		mutationKey: ['preference_update', 'books', category],
+		mutationFn: (fields: any) => deleteItem(fields, category)
 	})
 
 	return (
-		<div data-cy="feed-card" className="card card-compact max-w-xs text-base-content shadow">
+		<div data-cy="feed-card" className="card-compact card max-w-xs text-base-content shadow">
 			<figure className="pointer-events-none relative aspect-square w-full">
 				<Image
 					data-cy="feed-card-image"
@@ -34,8 +42,8 @@ export const ItemCardAdmin = ({ nameBooks, onDelete }: { nameBooks: any; onDelet
 						onClick={e => {
 							e.preventDefault()
 							mutate({
-                                userAuth: user?.auth_token,
-								bookId: nameBooks.id
+								userAuth: user?.auth_token,
+								Id: nameBooks.id
 							})
 							onDelete()
 						}}
